@@ -70,9 +70,9 @@
                 },
                 {
                     "name": "Equip Weapon",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "b3cd0e63-80e5-4dcc-94d5-ffc68282c935",
-                    "expectedControlType": "Integer",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
