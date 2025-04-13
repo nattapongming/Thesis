@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     PlayerMovement playerMovement;
     PlayerAttack playerAttack;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,14 +39,39 @@ public class PlayerController : MonoBehaviour
     public void Attack(InputAction.CallbackContext context)
     {
         if (context.performed)
-            playerAttack.StartAttack(true);
+            playerAttack.StartAttack();
         
     }
 
     public void AttackOther(InputAction.CallbackContext context)
     {
         if (context.performed)
-            playerAttack.StartAttack(false);
+            playerAttack.StartAttack();
+    }
+
+    public void EquipWeapon(InputAction.CallbackContext context)
+    {
+        // Check which button press
+        string keyPressed = "";
+
+        if (context.performed)
+            keyPressed = context.control.displayName;
+
+        int index = keyPressed switch
+        {
+            "1" => 0,
+            "2" => 1,
+            "3" => 2,
+            "4" => 3,
+            "5" => 4,
+            _ => -1
+        };
+
+        if (index >= 0 && index < playerAttack.playerWeaponInventory.Count)
+        {
+            playerAttack.curWeapon = playerAttack.playerWeaponInventory[index];
+            Debug.Log($"Switched to weapon {index + 1}: {playerAttack.curWeapon.name}");
+        }
     }
 
 }

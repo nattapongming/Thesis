@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1200866276871517683}
   - component: {fileID: 3994402205702148159}
   - component: {fileID: 5957613404509177304}
+  - component: {fileID: 5081547421020304667}
   - component: {fileID: 6697717100448143806}
   m_Layer: 7
   m_Name: Circle
@@ -18,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1200866276871517683
 Transform:
   m_ObjectHideFlags: 0
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248653727218510311}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.66, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.4292453, g: 0.56547135, b: 1, a: 1}
   m_FlipX: 0
@@ -101,8 +102,21 @@ MonoBehaviour:
   damage: 1
   faction: 0
   attackType: 1
-  speed: 5
+--- !u!114 &5081547421020304667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248653727218510311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7847c33c867447541991ac16d8f33d66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
   lifeTime: 3
+  direction: {x: 0, y: 0, z: 0}
 --- !u!58 &6697717100448143806
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,10 @@ namespace Movement
         // Other Component
         BoxCollider2D boxCollider;
         Rigidbody2D rb;
+        [SerializeField] GameObject weaponSpawnPoint;
+        PlayerStat playerStat;
+
+
         [HideInInspector] public Vector2 movementInput;
         private Vector2 smoothedMovement;
         private Vector2 mousePos;
@@ -26,13 +31,17 @@ namespace Movement
         {
             boxCollider = GetComponent<BoxCollider2D>();
             rb = GetComponent<Rigidbody2D>();
+            playerStat = GetComponent<PlayerStat>();
+
+            weaponSpawnPoint = transform.Find("WeaponSpawnPoint").gameObject;
         }
 
         private void Update()
         {
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            RotateFollowMouse();
+            RotateWithVelocity();
+            //RotateFollowMouse();
         }
 
         // Update is called once per frame
@@ -48,8 +57,10 @@ namespace Movement
                 smoothedMovement = Vector2.Lerp(smoothedMovement, movementInput, 0.1f);
             }
 
-            // Apply acceleration
-            if (movementInput != Vector2.zero && !isDashing)
+            // Apply acceleration only when player is moving
+            if (movementInput != Vector2.zero 
+                && !isDashing 
+                && !playerStat.isAttacking)
             {
                 curSpeed = Mathf.Min(curSpeed + acceleration * maxSpeed, maxSpeed); // Accelerate
             }
@@ -67,8 +78,6 @@ namespace Movement
 
         }
 
-
-
         void RotateFollowMouse()
         {
             Vector2 lookDir = mousePos - rb.position;
@@ -76,9 +85,36 @@ namespace Movement
             rb.rotation = angle;
         }
 
+        void RotateWithVelocity()
+        {
+            if (movementInput.sqrMagnitude > 0.01f) // Check if moving
+            {
+                // Normalize movement input
+                Vector2 direction = movementInput.normalized;
+
+                // Round to the nearest 8-way direction
+                float x = Mathf.Round(direction.x);
+                float y = Mathf.Round(direction.y);
+
+                // Ensure diagonal movement is correctly handled
+                if (x != 0 && y != 0)
+                {
+                    direction = new Vector2(x, y).normalized; // Keep diagonal at correct length
+                }
+                else
+                {
+                    direction = new Vector2(x, y); // Keep exact horizontal/vertical movement
+                }
+
+                // Convert to angle
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                weaponSpawnPoint.transform.rotation = Quaternion.Euler(0, 0, angle);
+            }
+        }
+
         public IEnumerator DashCoroutine()
         {
-            Debug.Log("Dashing");
+            //Debug.Log("Dashing");
             canDash = false;
             isDashing = true;
 
@@ -86,7 +122,7 @@ namespace Movement
 
             yield return new WaitForSeconds(dashTime);
 
-            Debug.Log("Finish Dashing");
+            //Debug.Log("Finish Dashing");
             canDash = true;
             isDashing = false;
 

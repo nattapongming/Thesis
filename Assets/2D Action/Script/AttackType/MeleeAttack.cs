@@ -16,11 +16,16 @@ namespace Stats
             
         }
 
-        public IEnumerator AttackCoroutine()
+        public IEnumerator MeleeAttackCoroutine(StatInfo statInfo)
         {
             ActiveAttack();
+            statInfo.isAttacking = true;
 
+            //Debug.Log($"Is attacking = {statInfo.isAttacking}");
             yield return new WaitForSeconds(attackDuration);
+
+            statInfo.isAttacking = false;
+            //Debug.Log($"Is attacking = {statInfo.isAttacking}");
 
             DeactiveAttack();
         }

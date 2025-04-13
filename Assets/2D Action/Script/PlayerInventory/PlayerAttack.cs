@@ -6,17 +6,19 @@ using Stats;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public List<GameObject[]> playerWeaponInventory;
-
-    public GameObject leftHandWeapon;
-    public GameObject rightHandWeapon;
+    public List<GameObject> playerWeaponInventory;
+    public GameObject curWeapon;
+    [SerializeField] private GameObject weaponSpawnPoint;
 
     private PlayerStat playerStat;
-
     // Start is called before the first frame update
     void Start()
-    {
+    {        
         playerStat = GetComponent<PlayerStat>();
+        if (playerWeaponInventory.Count > 0)
+        {
+            curWeapon = playerWeaponInventory[0];
+        }
     }
 
     // Update is called once per frame
@@ -25,29 +27,31 @@ public class PlayerAttack : MonoBehaviour
         
     }
 
-    public void StartAttack(bool isLeftWeapon)
+    public void StartAttack()
     {
-        if (isLeftWeapon && leftHandWeapon != null)
+        AttackStat curWeaponStat = curWeapon.GetComponent<AttackStat>();
+
+        switch (curWeaponStat.attackType)
         {
-            if (leftHandWeapon.GetComponent<AttackStat>().attackType == AttackStat.AttackType.melee)
-            {
-                MeleeAttack meleeAttack = leftHandWeapon.GetComponent<MeleeAttack>();
-                StartCoroutine(meleeAttack.AttackCoroutine());
-                playerStat.TriggerShake(5);
-            }
+            case AttackStat.AttackType.melee:
+                MeleeAttack meleeAttack = curWeaponStat as MeleeAttack;
+                StartCoroutine(meleeAttack.MeleeAttackCoroutine(playerStat));
+                break;
 
+            case AttackStat.AttackType.range:
+                //ProjectileMovement projectileMovement = Instantiate(curWeapon, transform.position, Quaternion.identity).GetComponent<ProjectileMovement>();
+                //meObject projectile = Instantiate(curWeapon, weaponSpawnPoint.transform.position, weaponSpawnPoint.transform.rotation);
 
-        } else if (!isLeftWeapon)
-        {
-            Instantiate(rightHandWeapon, transform.position, gameObject.transform.rotation);
+                ProjectileAttack projectile = Instantiate(curWeapon, weaponSpawnPoint.transform.position, weaponSpawnPoint.transform.rotation).GetComponent<ProjectileAttack>();
+                StartCoroutine(projectile.ProjectileAttackCoroutine(playerStat));
+                break;
 
-            /*if (rightHandWeapon.GetComponent<AttackStat>().attackType == AttackStat.AttackType.range)
-            {
-                ProjectileAttack rangeAttack = rightHandWeapon.GetComponent<ProjectileAttack>();
-                Instantiate(rightHandWeapon, transform.position, gameObject.transform.rotation);
-            }*/
+            default:
+                Debug.LogError("Error! This cur weapon doesn't have attack stat!");
+                break;
         }
-    }
 
+
+    }
 
 }

@@ -9,6 +9,8 @@ namespace Stats
     {
         private CinemachineImpulseSource impulseSource;
 
+
+
         // Start is called before the first frame update
         void Start()
         {

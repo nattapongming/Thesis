@@ -31,14 +31,21 @@ namespace Stats
         protected void OnTriggerEnter2D(Collider2D collision)
         {
             //Debug.Log($"Self {gameObject.name} other {collision.gameObject.name}");
+            
+            if (collision.CompareTag("Enemy"))
+            {
 
-            StatInfo otherStat = collision.gameObject.GetComponent<StatInfo>();
-            if (otherStat.faction != faction) otherStat.TakeDamage(damage);
+                StatInfo otherStat = collision.gameObject.GetComponent<StatInfo>();
+                if (otherStat.faction != faction) otherStat.TakeDamage(damage);
+
+            }
+
+            
         }
 
         public void ActiveAttack()
         {
-            //Debug.Log("ActiveAttack");
+
             boxCollider.enabled = true;
             sprite.enabled = true;
         }
@@ -49,5 +56,6 @@ namespace Stats
             sprite.enabled = false;
         }
 
+        
     }
 }
