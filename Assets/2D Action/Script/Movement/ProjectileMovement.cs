@@ -6,6 +6,7 @@ public class ProjectileMovement : MonoBehaviour
 {
     [SerializeField] float speed = 5;
     [SerializeField] float lifeTime = 3;
+    public bool onHitDestory = true;
 
     [HideInInspector] public Vector3 direction;
 

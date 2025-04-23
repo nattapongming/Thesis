@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Stats;
-
+using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject weaponSpawnPoint;
 
     private PlayerStat playerStat;
+    [SerializeField] private Image weaponSprite;
     // Start is called before the first frame update
     void Start()
     {        
@@ -18,6 +19,7 @@ public class PlayerAttack : MonoBehaviour
         if (playerWeaponInventory.Count > 0)
         {
             curWeapon = playerWeaponInventory[0];
+            SetWeaponSprite(playerWeaponInventory[0].GetComponent<AttackStat>().attackSprite);
         }
     }
 
@@ -54,4 +56,9 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
+    public void SetWeaponSprite(Sprite sprite)
+    {
+        weaponSprite.sprite = sprite;
+    }
+    
 }

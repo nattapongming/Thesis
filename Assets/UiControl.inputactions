@@ -1,0 +1,34 @@
+{
+    "name": "UiControl",
+    "maps": [
+        {
+            "name": "Ui",
+            "id": "d43faef1-a712-40ca-8b4b-bd464acfb4ab",
+            "actions": [
+                {
+                    "name": "Unpause",
+                    "type": "Button",
+                    "id": "a2ac760e-feea-456a-9e9d-314cd29330d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2bcc9a53-8ab3-4e69-8c45-5a29206fbd3b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Unpause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

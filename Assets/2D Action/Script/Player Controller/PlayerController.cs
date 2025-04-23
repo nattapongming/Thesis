@@ -3,18 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using Movement;
 using UnityEngine.InputSystem;
+using Stats;
+using Manager;
 
 public class PlayerController : MonoBehaviour
 {
+
     PlayerMovement playerMovement;
     PlayerAttack playerAttack;
+    PlayerInput playerInput;
 
+    // Other component
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerAttack = GetComponent<PlayerAttack>();
+        playerInput = GetComponent<PlayerInput>();
+
+        gameManager = GameManager.Instance.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -69,8 +78,19 @@ public class PlayerController : MonoBehaviour
 
         if (index >= 0 && index < playerAttack.playerWeaponInventory.Count)
         {
+            
             playerAttack.curWeapon = playerAttack.playerWeaponInventory[index];
+            playerAttack.SetWeaponSprite
+                (playerAttack.playerWeaponInventory[index].GetComponent<AttackStat>().attackSprite);
             Debug.Log($"Switched to weapon {index + 1}: {playerAttack.curWeapon.name}");
+        }
+    }
+
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            gameManager.UpdateGamePause(GamePauseType.Pause);
         }
     }
 

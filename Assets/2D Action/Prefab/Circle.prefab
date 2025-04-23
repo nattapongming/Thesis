@@ -99,9 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce900cfca65cf174eb770a38ca1f90fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectByEnchant: 1
   damage: 1
   faction: 0
   attackType: 1
+  attackSprite: {fileID: 21300000, guid: 1024f75795206cf4baa18d72380aa8e5, type: 3}
 --- !u!114 &5081547421020304667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifeTime: 3
+  onHitDestory: 1
   direction: {x: 0, y: 0, z: 0}
 --- !u!58 &6697717100448143806
 CircleCollider2D:

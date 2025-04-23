@@ -1,21 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.UI;
 
 namespace Stats
 {
     public class AttackStat : MonoBehaviour
     {
-        public enum AttackType { melee, range}
-        
+        public enum AttackType { melee, range }
+
+
+        [Header("General stats")]
         public float damage = 1;
+        public float managain = 0.1f;
         public Faction faction;
         public AttackType attackType;
+        public Sprite attackSprite;
+
+        [Header("Enchantment stats")]
+        public GameObject[] enchantment = new GameObject[5];
+        public bool affectByEnchant = false;
+
 
         protected BoxCollider2D boxCollider;
         protected SpriteRenderer sprite;
+        protected AttackEnchantmentApplier attackEnchantmentApplier;
 
         // Start is called before the first frame update
+
+        protected void Awake()
+        {
+            if(affectByEnchant && enchantment.Length > 0)
+            {
+                attackEnchantmentApplier = new AttackEnchantmentApplier(this);
+            }
+        }
+
         protected virtual void Start()
         {
             boxCollider = GetComponent<BoxCollider2D>();
@@ -28,7 +48,7 @@ namespace Stats
 
         }
 
-        protected void OnTriggerEnter2D(Collider2D collision)
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
             //Debug.Log($"Self {gameObject.name} other {collision.gameObject.name}");
             
@@ -40,7 +60,6 @@ namespace Stats
 
             }
 
-            
         }
 
         public void ActiveAttack()
