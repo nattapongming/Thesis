@@ -32,7 +32,7 @@ namespace Stats
         {
             Debug.Log($"Take damge {curHp} -> {curHp - damage}");
 
-            if (damage > curHp)
+            if (damage >= curHp)
             {
                 curHp = 0;
                 Died();

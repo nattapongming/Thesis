@@ -11,14 +11,15 @@ namespace Stats
 
 
         [Header("General stats")]
-        public float damage = 1;
-        public float managain = 0.1f;
         public Faction faction;
         public AttackType attackType;
         public Sprite attackSprite;
+        public float damage = 1;
+        public float managain = 0.1f;
+        public float attackCoolDown = 0.2f;
 
         [Header("Enchantment stats")]
-        public GameObject[] enchantment = new GameObject[5];
+        public ScriptableObject[] enchantment = new ScriptableObject[5];
         public bool affectByEnchant = false;
 
 
@@ -33,6 +34,7 @@ namespace Stats
             if(affectByEnchant && enchantment.Length > 0)
             {
                 attackEnchantmentApplier = new AttackEnchantmentApplier(this);
+                //Debug.Log($"Create attackenchantapplier of {this.gameObject}");
             }
         }
 
@@ -54,10 +56,9 @@ namespace Stats
             
             if (collision.CompareTag("Enemy"))
             {
-
                 StatInfo otherStat = collision.gameObject.GetComponent<StatInfo>();
                 if (otherStat.faction != faction) otherStat.TakeDamage(damage);
-
+                
             }
 
         }

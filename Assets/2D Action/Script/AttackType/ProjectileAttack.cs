@@ -31,8 +31,8 @@ public class ProjectileAttack : AttackStat
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        
-        if (projectileMovement.onHitDestory) Destroy(gameObject);
+        StatInfo otherStat = collision.gameObject.GetComponent<StatInfo>();
+        if (projectileMovement.onHitDestory && otherStat.faction != faction) Destroy(gameObject);
 
     }
 }

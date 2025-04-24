@@ -30,7 +30,7 @@ namespace Ai
         void FixedUpdate()
         {
             SetNewTarget(target);
-            RotateTowardsMovement();
+            //RotateTowardsMovement();
         }
 
         public void SetNewTarget(Transform newTarget = null)
