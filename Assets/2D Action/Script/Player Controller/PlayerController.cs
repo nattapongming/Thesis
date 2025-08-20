@@ -86,6 +86,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Inventory(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            gameManager.UpdateGamePause(GamePauseType.Pause);
+            gameManager.inventoryUi.SetActive(!gameManager.inventoryUi.activeSelf);
+        }
+    }
+
     public void Pause(InputAction.CallbackContext context)
     {
         if (context.performed)

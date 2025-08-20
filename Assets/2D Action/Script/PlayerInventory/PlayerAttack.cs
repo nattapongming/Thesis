@@ -20,6 +20,7 @@ public class PlayerAttack : MonoBehaviour
         {
             curWeapon = playerWeaponInventory[0];
             SetWeaponSprite(playerWeaponInventory[0].GetComponent<AttackStat>().attackSprite);
+            UpdateWeaponSlot();
         }
     }
 
@@ -60,5 +61,15 @@ public class PlayerAttack : MonoBehaviour
     {
         weaponSprite.sprite = sprite;
     }
-    
+
+    public void UpdateWeaponSlot()
+    { int i = 0;
+        foreach (GameObject attack in playerWeaponInventory)
+        {
+            attack.GetComponent<AttackStat>().weaponIndex = i;
+            attack.GetComponent<AttackStat>().CallPlayerWeaponEnchantment();
+            i++;
+            //Debug.Log($"This {attack} index is {attack.GetComponent<AttackStat>().weaponIndex}");
+        }
+    }
 }

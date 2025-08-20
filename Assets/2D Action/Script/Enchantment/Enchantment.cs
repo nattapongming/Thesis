@@ -13,6 +13,8 @@ public class Enchantment : ScriptableObject
     public Sprite enchantmentSprite;
     public string enchantmentDesc;
 
+    public string enchantmentName;
+    public List<string> enchantmentDescLines;
 
     [Header("Enchantment Stats")]
     // General Enchantment

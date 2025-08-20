@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 namespace Manager
 {
     public enum GamePauseType { None, Pause, CutScene, EndLevel }
-    public enum Debuff { Fire, Poison, Shock }
+    public enum Debuff { None, Inferno, Plague, Forstbrite, Divine }
 
     public class GameManager : MonoBehaviour
     {
@@ -16,9 +16,19 @@ namespace Manager
         public Difficulty curDifficulty = Difficulty.Normal;
         public GamePauseType pauseType = GamePauseType.None;
 
+        //other manager
         public LevelStatManager levelStatManager;
         public LevelRating levelRating;
+        public LevelResetManager levelResetManager;
+        public EnchantmentManager enchantmentManager;
 
+        public InventoryUiManager inventoryUiManager;
+
+        // other gameobject
+        public GameObject player;
+        public GameObject inventoryUi;
+
+        [SerializeField] private bool isSetDifficultyOnThisScript;
         [SerializeField] private GameObject pauseUi;
         [SerializeField] private PlayerInput playerinput;
 
@@ -34,7 +44,14 @@ namespace Manager
 
             Instance = this;
 
-            GameSetting.CurrentDifficulty = curDifficulty;
+            if (isSetDifficultyOnThisScript)
+            {
+                GameSetting.CurrentDifficulty = curDifficulty;
+            }
+            else
+            {
+                curDifficulty = GameSetting.CurrentDifficulty;
+            }
         }
 
         // Update is called once per frame
@@ -51,6 +68,7 @@ namespace Manager
             {
                 case GamePauseType.None:
                     pauseUi.SetActive(false);
+                    inventoryUi.SetActive(false);
                     UadatePauseSetting(1, true, false);
                     break;
 

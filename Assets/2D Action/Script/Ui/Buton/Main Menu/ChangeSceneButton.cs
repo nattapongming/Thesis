@@ -8,9 +8,11 @@ using UnityEngine.SceneManagement;
 
 namespace Ui
 {
-    public class ChnageSceneButton : MonoBehaviour
+    public class ChangeSceneButton : MonoBehaviour
     {
-        [SerializeField] private SceneAsset scene;
+        [SerializeField] private string sceneName;
+
+        //[SerializeField] private SceneAsset scene;
         [SerializeField] private bool isLoadScenAdditive;
 
         // Start is called before the first frame update
@@ -29,11 +31,11 @@ namespace Ui
         {
             if (isLoadScenAdditive)
             {
-                SceneManager.LoadScene(scene.name, LoadSceneMode.Additive);
+                SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
             }
             else
             {
-                SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
+                SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
             }
 
         }

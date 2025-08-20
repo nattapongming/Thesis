@@ -1,3 +1,4 @@
+using Manager;
 using Stats;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,11 +7,21 @@ using UnityEngine;
 public class AttackEnchantmentApplier
 {
     private AttackStat targetWeapon;
+    private BoxCollider2D boxCollider2D;
+    private bool isEnchantmentIsMainWeapon;
+    private ScriptableObject[] enchantment = new ScriptableObject[5];
+
+    private GameManager gameManager = GameManager.Instance.GetComponent<GameManager>();
 
     public AttackEnchantmentApplier(AttackStat targetWeapon)
     {
         this.targetWeapon = targetWeapon;
-
+        if (targetWeapon.weaponIndex == 0)
+        {
+            Debug.Log($"This '{targetWeapon.name} is main weapon!'");
+            isEnchantmentIsMainWeapon = true;
+        }
+        CheckForEnchanmentSlot();
         ApplyEnchantments();
     }
 
@@ -23,7 +34,32 @@ public class AttackEnchantmentApplier
     // Update is called once per frame
     void Update()
     {
-        
+    }
+
+    // Compare to enchantment manager and apply
+    private void CheckForEnchanmentSlot()
+    {
+        int i = 0;
+        if (isEnchantmentIsMainWeapon)
+        {
+            foreach(Enchantment enchantment in gameManager.enchantmentManager.mainEnchantment)
+            {
+                this.enchantment[i] = enchantment;
+                //Debug.Log($"Apply enchament {i} for {targetWeapon.name}");
+                i++;
+            }
+
+        }
+        else
+        {
+            foreach (Enchantment enchantment in gameManager.enchantmentManager.secEnchantment)
+            {
+                this.enchantment[i] = enchantment;
+                //Debug.Log($"Apply enchament {i} for {targetWeapon.name}");
+                i++;
+            }
+
+        }
     }
 
     private void ApplyEnchantments()
@@ -40,12 +76,12 @@ public class AttackEnchantmentApplier
         float totalCooldownBonus = 0f;
         float totalScaleMultiplier = 1f;
 
-        foreach (var enchantSO in targetWeapon.enchantment)
+        foreach (var enchantSO in enchantment)
         {
             if (enchantSO is not Enchantment enchantment) continue;
             if (!IsValidType(enchantment.enchantmentCompareable)) continue;
 
-            // Accumulate additive effects
+            // Stack enchantment effects
             totalDamageBonus += enchantment.damagePercent;
             totalManaGainBonus += enchantment.manaGainPercent;
             totalCooldownBonus += enchantment.attackCoolDownPercent;
@@ -63,16 +99,19 @@ public class AttackEnchantmentApplier
             }
         }
 
-        // Clamp total scale to avoid extreme visuals
+        // Clamp total scale
         float minScale = 0.1f;
         float maxScale = 5.0f;
         totalScaleMultiplier = Mathf.Clamp(totalScaleMultiplier, minScale, maxScale);
 
-        // Apply modified stats
+        // Apply stacked stats
         targetWeapon.damage = baseDamage + (baseDamage * totalDamageBonus / 100f);
         targetWeapon.managain = baseManaGain + (baseManaGain * totalManaGainBonus / 100f);
         targetWeapon.attackCoolDown = baseCooldown + (baseCooldown * totalCooldownBonus / 100f);
         targetWeapon.transform.localScale = baseScale * totalScaleMultiplier;
+
+        // Handle difference collider
+        AdjustColliderSize(targetWeapon.gameObject, totalScaleMultiplier);
     }
 
     private void ApplyMeleeEnchantment(Enchantment enchantment)
@@ -86,6 +125,36 @@ public class AttackEnchantmentApplier
         {
             projectileMovement.speed += (projectileMovement.speed * enchantment.projectileSpeedPercent) / 100f;
             projectileMovement.lifeTime += (projectileMovement.lifeTime * enchantment.projectileLifeTimePercent) / 100f;
+        }
+    }
+
+    private void AdjustColliderSize(GameObject obj, float scaleMultiplier)
+    {
+        if (obj.TryGetComponent<BoxCollider2D>(out var box))
+        {
+            box.size *= scaleMultiplier;
+        }
+        else if (obj.TryGetComponent<CircleCollider2D>(out var circle))
+        {
+            circle.radius *= scaleMultiplier;
+        }
+        else if (obj.TryGetComponent<CapsuleCollider2D>(out var capsule))
+        {
+            capsule.size *= scaleMultiplier;
+        }
+        else if (obj.TryGetComponent<PolygonCollider2D>(out var polygon))
+        {
+            Vector2[] originalPoints = polygon.points;
+            Vector2[] scaledPoints = new Vector2[originalPoints.Length];
+            for (int i = 0; i < originalPoints.Length; i++)
+            {
+                scaledPoints[i] = originalPoints[i] * scaleMultiplier;
+            }
+            polygon.points = scaledPoints;
+        }
+        else
+        {
+            Debug.LogWarning($"No supported collider found on {obj.name} for scaling.");
         }
     }
 

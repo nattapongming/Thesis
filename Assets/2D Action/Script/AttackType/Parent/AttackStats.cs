@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.UI;
 
 namespace Stats
 {
@@ -21,21 +20,22 @@ namespace Stats
         [Header("Enchantment stats")]
         public ScriptableObject[] enchantment = new ScriptableObject[5];
         public bool affectByEnchant = false;
+        public int weaponIndex = -1;
 
-
-        protected BoxCollider2D boxCollider;
-        protected SpriteRenderer sprite;
+        [SerializeField] protected BoxCollider2D boxCollider;
+        [SerializeField] protected SpriteRenderer sprite;
         protected AttackEnchantmentApplier attackEnchantmentApplier;
 
         // Start is called before the first frame update
 
         protected void Awake()
         {
-            if(affectByEnchant && enchantment.Length > 0)
+            /*if(affectByEnchant && enchantment.Length > 0 && weaponIndex != -1)
             {
+                Debug.Log("working!");
                 attackEnchantmentApplier = new AttackEnchantmentApplier(this);
                 //Debug.Log($"Create attackenchantapplier of {this.gameObject}");
-            }
+            }*/
         }
 
         protected virtual void Start()
@@ -65,7 +65,6 @@ namespace Stats
 
         public void ActiveAttack()
         {
-
             boxCollider.enabled = true;
             sprite.enabled = true;
         }
@@ -76,6 +75,9 @@ namespace Stats
             sprite.enabled = false;
         }
 
-        
+        public void CallPlayerWeaponEnchantment()
+        {
+            attackEnchantmentApplier = new AttackEnchantmentApplier(this);
+        }
     }
 }

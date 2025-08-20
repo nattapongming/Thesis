@@ -40,8 +40,8 @@ namespace Movement
         {
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            RotateWithVelocity();
-            //RotateFollowMouse();
+            //RotateWithVelocity();
+            RotateFollowMouse();
         }
 
         // Update is called once per frame
@@ -82,7 +82,7 @@ namespace Movement
         {
             Vector2 lookDir = mousePos - rb.position;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-            rb.rotation = angle;
+            weaponSpawnPoint.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
 
         void RotateWithVelocity()

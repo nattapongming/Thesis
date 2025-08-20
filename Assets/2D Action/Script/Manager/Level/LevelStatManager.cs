@@ -10,7 +10,7 @@ namespace Manager
     {
         [Header("Level info")]
 
-        [SerializeField] private string levelName;
+        public string levelName;
         [SerializeField] private TMP_Text levelNameText;
         [SerializeField] private TMP_Text difficultyText;
 
@@ -36,8 +36,8 @@ namespace Manager
         private void Start()
         {
             levelRating = GameManager.Instance.levelRating;
-            /*UpdateAllUi();
-            levelRating.RankRating();*/
+            UpdateAllUi();
+            levelRating.RankRating();
         }
 
         // Update is called once per frame

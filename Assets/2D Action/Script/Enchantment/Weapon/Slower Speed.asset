@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0830e8b3c10a874782955e659ed405e, type: 3}
-  m_Name: Test
+  m_Name: Slower Speed
   m_EditorClassIdentifier: 
   enchantmentSprite: {fileID: 0}
   enchantmentDesc: 
-  enchantmentCompareable: 0
-  damagePercent: 120
-  manaGainPercent: 50
+  enchantmentName: 
+  enchantmentDescLines:
+  - 
+  - 
+  enchantmentCompareable: 1
+  damagePercent: 0
+  manaGainPercent: 0
   applyDebuff: 0
   debuffTime: 1
   attackSize: 1
   attackCoolDownPercent: 0
-  projectileSpeedPercent: 0
+  projectileSpeedPercent: -25
   projectileLifeTimePercent: 0

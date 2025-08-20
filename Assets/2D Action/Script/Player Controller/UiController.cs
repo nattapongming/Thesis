@@ -31,4 +31,12 @@ public class UiController : MonoBehaviour
             gameManager.UpdateGamePause(GamePauseType.None);
         }
     }
+
+    public void UnInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed && gameManager)
+        {
+            gameManager.UpdateGamePause(GamePauseType.None);
+        }
+    }
 }

@@ -23,7 +23,7 @@ namespace Ai
 
             agent.updateRotation = false;
             agent.updateUpAxis = false;
-
+            agent.updatePosition = false;
         }
 
         // Update is called once per frame
@@ -31,19 +31,28 @@ namespace Ai
         {
             SetNewTarget(target);
             //RotateTowardsMovement();
+            
+            if (agent.remainingDistance <= agent.stoppingDistance + 0.05f)
+            {
+                rb.velocity = Vector2.zero;
+            } else
+            {
+                Vector2 dir = (agent.steeringTarget - transform.position).normalized;
+                rb.velocity = dir * agent.speed;
+            }
         }
 
         public void SetNewTarget(Transform newTarget = null)
         {
             if (newTarget == null) return;
+
+            target = newTarget;
+
             if (IsTargetOrSelfMoveFarEnough())
             {
                 lastSelfPosition = transform.position;
-                lastTargetPosition = newTarget.position;
-
-                agent.SetDestination(newTarget.position);
-
-                if (newTarget != target) target = newTarget;
+                lastTargetPosition = target.position;
+                agent.SetDestination(target.position);
             }
 
         }

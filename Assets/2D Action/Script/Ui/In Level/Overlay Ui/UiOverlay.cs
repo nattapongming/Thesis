@@ -60,6 +60,7 @@ namespace Ui
 
         public void DisableOverlayUi()
         {
+            if (!gameObject.activeSelf) return;
             uiOverlay.SetActive(false);
             gameObject.SetActive(false);
         }

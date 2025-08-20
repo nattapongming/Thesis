@@ -21,7 +21,7 @@ namespace Manager
         [SerializeField] private int arenaRankThreshold = 12;
 
         [SerializeField] private int overAllRating = 0;
-        [SerializeField] private int overAllRatingThreshold = 5;
+        //[SerializeField] private int overAllRatingThreshold = 5;
 
         [Header("UI Component")]
 

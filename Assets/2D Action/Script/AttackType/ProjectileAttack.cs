@@ -12,6 +12,7 @@ public class ProjectileAttack : AttackStat
     {
         sprite = GetComponent<SpriteRenderer>();
         projectileMovement = GetComponent<ProjectileMovement>();
+        CallPlayerWeaponEnchantment();
     }
 
     // Update is called once per frame
@@ -32,6 +33,7 @@ public class ProjectileAttack : AttackStat
     {
         base.OnTriggerEnter2D(collision);
         StatInfo otherStat = collision.gameObject.GetComponent<StatInfo>();
+        if (!otherStat) return;
         if (projectileMovement.onHitDestory && otherStat.faction != faction) Destroy(gameObject);
 
     }

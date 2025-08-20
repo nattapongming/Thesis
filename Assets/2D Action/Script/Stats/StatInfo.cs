@@ -13,7 +13,7 @@ namespace Stats
         public float speed = 5;
         public Faction faction = Faction.None;
 
-        [SerializeField] private float curHp;
+        [SerializeField] protected float curHp;
         [HideInInspector] public bool isAttacking;
 
         // Start is called before the first frame update
@@ -30,7 +30,7 @@ namespace Stats
 
         public void TakeDamage(float damage)
         {
-            Debug.Log($"Take damge {curHp} -> {curHp - damage}");
+            //Debug.Log($"Take damge {curHp} -> {curHp - damage}");
 
             if (damage >= curHp)
             {

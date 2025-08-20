@@ -1,4 +1,5 @@
 using Ai;
+using Manager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,14 @@ namespace Stats
     public class AiStat : StatInfo
     {
         private NavMeshAgent agent;
-        private AiStatModiflier aiStatModiflier;
+        [SerializeField] private AiStatModiflier aiStatModiflier;
+
+        [Header("Ai stat")]
+        public bool isCollisionDamage;
+        [SerializeField] float collisionDamage = 1;
+
+        // Other called component
+        [HideInInspector] public EnemySpawn partOfSpawnArena;
 
         protected override void Start()
         {
@@ -17,9 +25,11 @@ namespace Stats
 
             agent = GetComponent<NavMeshAgent>();
             aiStatModiflier = GetComponent<AiStatModiflier>();
+            GameManager.Instance.levelResetManager.enemyGameObject.Add(this.gameObject);
 
+            if (aiStatModiflier) aiStatModiflier.SetDiffcalityStat(this);
             agent.speed = speed;
-            if (aiStatModiflier) aiStatModiflier.SetDiffcalityStat();
+            isAttacking = true;
         }
 
         // Update is called once per frame
@@ -33,6 +43,20 @@ namespace Stats
             base.Died();
         }
 
-        
+        private void OnDestroy()
+        {
+            if (partOfSpawnArena) partOfSpawnArena.enemySpawnNumber--;
+            GameManager.Instance.levelResetManager.enemyGameObject.Remove(this.gameObject);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            StatInfo otherstat = collision.gameObject.GetComponent<StatInfo>();
+            if (otherstat && otherstat.faction != faction && isAttacking)
+            {
+                Debug.Log("This is enemy!");
+                otherstat.TakeDamage(collisionDamage);
+            }
+        }
     }
 }
