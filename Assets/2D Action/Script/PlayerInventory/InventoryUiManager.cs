@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class InventoryUiManager : MonoBehaviour
 {
-    private GameManager gameManager = GameManager.Instance.GetComponent<GameManager>();
 
     public string selectWeapon;
     public string selectEnchantment;
