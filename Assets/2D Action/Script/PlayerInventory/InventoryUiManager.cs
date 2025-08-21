@@ -1,12 +1,15 @@
+using Manager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryUiManager : MonoBehaviour
 {
+    private GameManager gameManager = GameManager.Instance.GetComponent<GameManager>();
+
     public string selectWeapon;
     public string selectEnchantment;
-
+    
     private string enchantmentName;
     private GameObject enchantmentButton;
 
@@ -16,7 +19,7 @@ public class InventoryUiManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //gameManager = GameManager.Instance.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -38,7 +41,8 @@ public class InventoryUiManager : MonoBehaviour
         // when click same button in quick succession
         else if (quickSuccesstionDelay > 0)
         {
-
+            EquipOrDeequipEnchantment();
+            Debug.Log($"Equip {enchantmentName}");
         }
         // or click to unselect 
         else
@@ -52,13 +56,20 @@ public class InventoryUiManager : MonoBehaviour
     {
         if (button != null && enchantmentButton)
         {
+            Debug.Log("Select button");
             enchantmentButton.SetActive(true);
         }
         else
         {
             enchantmentButton = button;
+            Debug.Log("Deselect Button");
             enchantmentButton.SetActive(false);
         }
+    }
+
+    private void EquipOrDeequipEnchantment()
+    {
+
     }
 
     private void StartEquipCountDown()
