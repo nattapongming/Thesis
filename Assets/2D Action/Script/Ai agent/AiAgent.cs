@@ -11,6 +11,8 @@ namespace Ai
 
         NavMeshAgent agent;
         Rigidbody2D rb;
+        AiAttack aiTurret;
+
 
         private Vector2 lastTargetPosition;
         private Vector2 lastSelfPosition;
@@ -21,6 +23,12 @@ namespace Ai
             rb = GetComponent<Rigidbody2D>();
             agent = GetComponent<NavMeshAgent>();
 
+            if (TryGetComponent<AiAttack>(out aiTurret))
+            {
+                aiTurret = GetComponent<AiAttack>();
+                aiTurret.target = target;
+            }
+
             agent.updateRotation = false;
             agent.updateUpAxis = false;
             agent.updatePosition = false;
@@ -29,6 +37,7 @@ namespace Ai
         // Update is called once per frame
         void FixedUpdate()
         {
+            if (aiTurret) aiTurret.target = target;
             SetNewTarget(target);
             //RotateTowardsMovement();
             

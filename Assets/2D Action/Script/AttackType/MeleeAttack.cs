@@ -9,6 +9,11 @@ namespace Stats
     {
         [SerializeField] float attackDuration = 0.1f;
 
+        protected override void Awake()
+        {
+            base.Awake();
+        }
+
         protected override void Start()
         {
             base.Start();
@@ -26,12 +31,9 @@ namespace Stats
             ActiveAttack();
             statInfo.isAttacking = true;
 
-            //Debug.Log($"Is attacking = {statInfo.isAttacking}");
             yield return new WaitForSeconds(attackDuration);
 
             statInfo.isAttacking = false;
-            //Debug.Log($"Is attacking = {statInfo.isAttacking}");
-
             DeactiveAttack();
         }
 
@@ -45,9 +47,5 @@ namespace Stats
             }
         }
 
-        void UpdateEnchantment()
-        {
-            
-        }
     }
 }

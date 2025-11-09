@@ -24,10 +24,16 @@ namespace Manager
         public int arenaCount = 0;
         public int arenaPercent;
 
+        public int objectiveComplete = 0;
+        public int gemGain = 0;
+
         [SerializeField] private TMP_Text minuteText;
         [SerializeField] private TMP_Text secondText;
         [SerializeField] private TMP_Text deathText;
         [SerializeField] private TMP_Text arenaText;
+
+        [SerializeField] private TMP_Text objectiveText;
+        [SerializeField] private TMP_Text gemText;
 
         private LevelRating levelRating;
 
@@ -67,6 +73,9 @@ namespace Manager
             UpdateAreanaUi();
             UpdatedLevelInfo();
 
+            UpdateObjectiveUi();
+            UpdateCurrencyUi();
+
             levelRating.RankRating();
         }
 
@@ -87,6 +96,16 @@ namespace Manager
         {
             arenaPercent = arenaComplete * 100 / arenaCount;
             arenaText.text = arenaPercent.ToString() + "%";
+        }
+
+        public void UpdateObjectiveUi()
+        {
+            objectiveText.text = objectiveComplete.ToString();
+        }
+
+        private void UpdateCurrencyUi()
+        {
+            gemText.text = gemGain.ToString();
         }
 
         public void UpdatedLevelInfo()

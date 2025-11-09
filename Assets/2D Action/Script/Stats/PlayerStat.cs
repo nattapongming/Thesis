@@ -9,6 +9,7 @@ namespace Stats
     public class PlayerStat : StatInfo
     {
         private CinemachineImpulseSource impulseSource;
+        public float playerCurrentAttackCoolDown = 0;
 
 
         // Start is called before the first frame update

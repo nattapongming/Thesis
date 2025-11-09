@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EnchantmentSlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public Enchantment enchantment;
+    public EnchantmentSO enchantment;
     public Image icon;
 
     private CanvasGroup canvasGroup;

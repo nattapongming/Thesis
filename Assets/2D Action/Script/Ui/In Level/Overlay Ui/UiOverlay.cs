@@ -50,6 +50,7 @@ namespace Ui
                 case RunUiScript.LevelEnd:            
                     if (levelStatManager)
                     levelStatManager.UpdateAllUi();
+                    PlayerCurrency.AddGems(levelStatManager.gemGain);
                     GameManager.Instance.GetComponent<GameManager>().UpdateGamePause(GamePauseType.EndLevel);
                     break;
 

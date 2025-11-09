@@ -13,8 +13,9 @@ namespace Stats
         public float speed = 5;
         public Faction faction = Faction.None;
 
-        [SerializeField] protected float curHp;
-        [HideInInspector] public bool isAttacking;
+        public float curHp;
+        public bool isAttacking;
+        public bool isInvincible;
 
         // Start is called before the first frame update
         protected virtual void Start()

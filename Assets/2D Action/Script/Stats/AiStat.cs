@@ -29,7 +29,6 @@ namespace Stats
 
             if (aiStatModiflier) aiStatModiflier.SetDiffcalityStat(this);
             agent.speed = speed;
-            isAttacking = true;
         }
 
         // Update is called once per frame
@@ -52,11 +51,16 @@ namespace Stats
         private void OnCollisionEnter2D(Collision2D collision)
         {
             StatInfo otherstat = collision.gameObject.GetComponent<StatInfo>();
-            if (otherstat && otherstat.faction != faction && isAttacking)
+            if (otherstat && otherstat.faction != faction && isAttacking && isCollisionDamage)
             {
-                Debug.Log("This is enemy!");
+                //Debug.Log("This is enemy!");
                 otherstat.TakeDamage(collisionDamage);
             }
+        }
+
+        public void UpdateSpeed(float speed)
+        {
+            agent.speed = speed;
         }
     }
 }

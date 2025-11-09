@@ -13,12 +13,25 @@ namespace Stats
         public Faction faction;
         public AttackType attackType;
         public Sprite attackSprite;
+        public SpriteRenderer spriteGO;
         public float damage = 1;
         public float managain = 0.1f;
         public float attackCoolDown = 0.2f;
 
+        [Header("Original stats")]
+        public float ogDamage = 0;
+        public float ogManagain = 0;
+        public float ogAttackCoolDown = 0;
+        private Vector3 ogScale;
+
+        // For colllider (in case of many type)
+        private Vector2 ogBoxSize;
+        private float ogCircleRadius;
+        private Vector2 ogCapsuleSize;
+        private Vector2[] ogPolygonPoints;
+
         [Header("Enchantment stats")]
-        public ScriptableObject[] enchantment = new ScriptableObject[5];
+        //public ScriptableObject[] enchantment = new ScriptableObject[5];
         public bool affectByEnchant = false;
         public int weaponIndex = -1;
 
@@ -28,14 +41,18 @@ namespace Stats
 
         // Start is called before the first frame update
 
-        protected void Awake()
+        protected virtual void Awake()
         {
-            /*if(affectByEnchant && enchantment.Length > 0 && weaponIndex != -1)
-            {
-                Debug.Log("working!");
-                attackEnchantmentApplier = new AttackEnchantmentApplier(this);
-                //Debug.Log($"Create attackenchantapplier of {this.gameObject}");
-            }*/
+            if (ogDamage == 0) ogDamage = damage;
+            if (ogManagain == 0) ogManagain = managain;
+            if (ogAttackCoolDown == 0) ogAttackCoolDown = attackCoolDown;
+
+            ogScale = transform.localScale;
+
+            if (TryGetComponent<BoxCollider2D>(out var box)) ogBoxSize = box.size;
+            if (TryGetComponent<CircleCollider2D>(out var circle)) ogCircleRadius = circle.radius;
+            if (TryGetComponent<CapsuleCollider2D>(out var capsule)) ogCapsuleSize = capsule.size;
+            if (TryGetComponent<PolygonCollider2D>(out var polygon)) ogPolygonPoints = polygon.points;
         }
 
         protected virtual void Start()
@@ -44,22 +61,49 @@ namespace Stats
             sprite = GetComponent<SpriteRenderer>();
         }
 
-        // Update is called once per frame
-        void Update()
+        
+        public void ResetToOriginalStats()
         {
+            damage = ogDamage;
+            managain = ogManagain;
+            attackCoolDown = ogAttackCoolDown;
 
+            transform.localScale = ogScale;
+
+            ResetColliderSize();
+        }
+
+        private void ResetColliderSize()
+        {
+            if (TryGetComponent<BoxCollider2D>(out var box))
+            {
+                box.size = ogBoxSize; // Assign, not multiply
+            }
+            else if (TryGetComponent<CircleCollider2D>(out var circle))
+            {
+                circle.radius = ogCircleRadius;
+            }
+            else if (TryGetComponent<CapsuleCollider2D>(out var capsule))
+            {
+                capsule.size = ogCapsuleSize;
+            }
+            else if (TryGetComponent<PolygonCollider2D>(out var polygon))
+            {
+                polygon.points = (Vector2[])ogPolygonPoints.Clone(); // Clone to avoid ref issues
+            }
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
             //Debug.Log($"Self {gameObject.name} other {collision.gameObject.name}");
-            
-            if (collision.CompareTag("Enemy"))
+
+            if (collision.CompareTag("Enemy") || collision.CompareTag("Player"))
             {
                 StatInfo otherStat = collision.gameObject.GetComponent<StatInfo>();
                 if (otherStat.faction != faction) otherStat.TakeDamage(damage);
-                
+
             }
+            else return;
 
         }
 
@@ -75,9 +119,16 @@ namespace Stats
             sprite.enabled = false;
         }
 
+
         public void CallPlayerWeaponEnchantment()
         {
+            ResetToOriginalStats();
             attackEnchantmentApplier = new AttackEnchantmentApplier(this);
+        }
+
+        private void OnDisable()
+        {
+            ResetToOriginalStats();
         }
     }
 }

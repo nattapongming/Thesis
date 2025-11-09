@@ -11,8 +11,10 @@ public class PlayerController : MonoBehaviour
 
     PlayerMovement playerMovement;
     PlayerAttack playerAttack;
+    PlayerStat playerStat;
     PlayerInput playerInput;
 
+    [SerializeField]public bool isAttacking;
     // Other component
     GameManager gameManager;
 
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerAttack = GetComponent<PlayerAttack>();
+        playerStat = GetComponent<PlayerStat>();
         playerInput = GetComponent<PlayerInput>();
 
         gameManager = GameManager.Instance.GetComponent<GameManager>();
@@ -47,15 +50,25 @@ public class PlayerController : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed)
-            playerAttack.StartAttack();
+        if (context.started)
+        {
+            isAttacking = true;
+            
+        }
+
+        if (context.canceled)
+        {
+            isAttacking = false;
+        }
+        /*if (context.performed)
+            playerAttack.StartAttack();*/
         
     }
 
     public void AttackOther(InputAction.CallbackContext context)
     {
-        if (context.performed)
-            playerAttack.StartAttack();
+        /*if (context.performed)
+            playerAttack.StartAttack();*/
     }
 
     public void EquipWeapon(InputAction.CallbackContext context)
@@ -79,10 +92,10 @@ public class PlayerController : MonoBehaviour
         if (index >= 0 && index < playerAttack.playerWeaponInventory.Count)
         {
             
-            playerAttack.curWeapon = playerAttack.playerWeaponInventory[index];
+            playerAttack.curWeaponInstance = playerAttack.runtimeWeaponInstances[index];
             playerAttack.SetWeaponSprite
                 (playerAttack.playerWeaponInventory[index].GetComponent<AttackStat>().attackSprite);
-            Debug.Log($"Switched to weapon {index + 1}: {playerAttack.curWeapon.name}");
+            Debug.Log($"Switched to weapon {index + 1}: {playerAttack.curWeaponInstance.name}");
         }
     }
 

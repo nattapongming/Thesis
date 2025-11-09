@@ -37,12 +37,12 @@ public class AttackEnchantmentApplier
     }
 
     // Compare to enchantment manager and apply
-    private void CheckForEnchanmentSlot()
+    public void CheckForEnchanmentSlot()
     {
         int i = 0;
         if (isEnchantmentIsMainWeapon)
         {
-            foreach(Enchantment enchantment in gameManager.enchantmentManager.mainEnchantment)
+            foreach(EnchantmentSO enchantment in gameManager.enchantmentManager.mainEnchantment)
             {
                 this.enchantment[i] = enchantment;
                 //Debug.Log($"Apply enchament {i} for {targetWeapon.name}");
@@ -52,7 +52,7 @@ public class AttackEnchantmentApplier
         }
         else
         {
-            foreach (Enchantment enchantment in gameManager.enchantmentManager.secEnchantment)
+            foreach (EnchantmentSO enchantment in gameManager.enchantmentManager.secEnchantment)
             {
                 this.enchantment[i] = enchantment;
                 //Debug.Log($"Apply enchament {i} for {targetWeapon.name}");
@@ -78,7 +78,7 @@ public class AttackEnchantmentApplier
 
         foreach (var enchantSO in enchantment)
         {
-            if (enchantSO is not Enchantment enchantment) continue;
+            if (enchantSO is not EnchantmentSO enchantment) continue;
             if (!IsValidType(enchantment.enchantmentCompareable)) continue;
 
             // Stack enchantment effects
@@ -104,6 +104,8 @@ public class AttackEnchantmentApplier
         float maxScale = 5.0f;
         totalScaleMultiplier = Mathf.Clamp(totalScaleMultiplier, minScale, maxScale);
 
+        //Debug.Log($"Change {targetWeapon.transform.localScale} to {baseScale * totalScaleMultiplier}");
+
         // Apply stacked stats
         targetWeapon.damage = baseDamage + (baseDamage * totalDamageBonus / 100f);
         targetWeapon.managain = baseManaGain + (baseManaGain * totalManaGainBonus / 100f);
@@ -114,12 +116,12 @@ public class AttackEnchantmentApplier
         AdjustColliderSize(targetWeapon.gameObject, totalScaleMultiplier);
     }
 
-    private void ApplyMeleeEnchantment(Enchantment enchantment)
+    private void ApplyMeleeEnchantment(EnchantmentSO enchantment)
     {
         // leave for future modifly
     }
 
-    private void ApplyRangeEnchantment(Enchantment enchantment)
+    private void ApplyRangeEnchantment(EnchantmentSO enchantment)
     {
         if (targetWeapon.TryGetComponent<ProjectileMovement>(out var projectileMovement))
         {

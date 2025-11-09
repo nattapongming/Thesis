@@ -7,11 +7,19 @@ public class ProjectileAttack : AttackStat
 {
     protected ProjectileMovement projectileMovement;
 
-    // Start is called before the first frame update
+    protected override void Awake()
+    {
+        base.Awake();
+        projectileMovement = GetComponent<ProjectileMovement>();
+
+    }
+
     protected override void Start()
     {
+        base.Start();
+
         sprite = GetComponent<SpriteRenderer>();
-        projectileMovement = GetComponent<ProjectileMovement>();
+        if (affectByEnchant)
         CallPlayerWeaponEnchantment();
     }
 
@@ -34,7 +42,12 @@ public class ProjectileAttack : AttackStat
         base.OnTriggerEnter2D(collision);
         StatInfo otherStat = collision.gameObject.GetComponent<StatInfo>();
         if (!otherStat) return;
-        if (projectileMovement.onHitDestory && otherStat.faction != faction) Destroy(gameObject);
+        //Debug.Log($"Other gameobject is {collision.gameObject.name} and faction is {otherStat.faction}, self faction is {faction}");
+        
+        if (projectileMovement.onHitDestory && otherStat.faction != faction && !otherStat.isInvincible) 
+        {
+            Destroy(gameObject);
+        }
 
     }
 }

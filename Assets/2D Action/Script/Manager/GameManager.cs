@@ -21,6 +21,8 @@ namespace Manager
         public LevelRating levelRating;
         public LevelResetManager levelResetManager;
         public EnchantmentManager enchantmentManager;
+        public PlayerProgressManager playerProgressManager;
+        
 
         public InventoryUiManager inventoryUiManager;
 

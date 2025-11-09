@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LevelArena : MonoBehaviour
 {
+    private LevelStatManager levelStatManager;
+
     public int activespawnpoint = 0;
     [SerializeField] List<EnemySpawn> enemySpawnPoint;
     [SerializeField] GameObject arenaBarrier;
@@ -17,6 +19,8 @@ public class LevelArena : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelStatManager = GameManager.Instance.levelStatManager;
+
         foreach (EnemySpawn enemySpawn in enemySpawnPoint)
         {
             enemySpawn.levelArena = this;
@@ -55,7 +59,8 @@ public class LevelArena : MonoBehaviour
         Debug.Log("Finish Arena");
         Destroy(arenaBarrier);
         Destroy(gameObject);
-        GameManager.Instance.levelStatManager.arenaComplete++;
+        levelStatManager.objectiveComplete++;
+        levelStatManager.gemGain++;
     }
 
 

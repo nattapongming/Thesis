@@ -2,6 +2,7 @@ using Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Sprites;
 
 namespace Movement
 {
@@ -11,6 +12,8 @@ namespace Movement
         // Other Component
         BoxCollider2D boxCollider;
         Rigidbody2D rb;
+        SpriteRenderer spriteRenderer;
+
         [SerializeField] GameObject weaponSpawnPoint;
         PlayerStat playerStat;
 
@@ -23,6 +26,8 @@ namespace Movement
         // Dash
 
         public float dashTime = 0.1f;
+        public float dashSpeed = 15f;
+        public float dashCoolDown = 0.25f;
         [HideInInspector] public bool canDash = true;
         [HideInInspector] public bool isDashing;
 
@@ -32,8 +37,12 @@ namespace Movement
             boxCollider = GetComponent<BoxCollider2D>();
             rb = GetComponent<Rigidbody2D>();
             playerStat = GetComponent<PlayerStat>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
 
-            weaponSpawnPoint = transform.Find("WeaponSpawnPoint").gameObject;
+            if (weaponSpawnPoint == null)
+            {
+                Debug.LogError("WeaponSpawnPoint not assigned in Inspector!");
+            }
         }
 
         private void Update()
@@ -42,6 +51,11 @@ namespace Movement
 
             //RotateWithVelocity();
             RotateFollowMouse();
+
+            if (weaponSpawnPoint != null)
+            {
+                weaponSpawnPoint.transform.position = transform.position;
+            }
         }
 
         // Update is called once per frame
@@ -60,7 +74,7 @@ namespace Movement
             // Apply acceleration only when player is moving
             if (movementInput != Vector2.zero 
                 && !isDashing 
-                && !playerStat.isAttacking)
+                )
             {
                 curSpeed = Mathf.Min(curSpeed + acceleration * maxSpeed, maxSpeed); // Accelerate
             }
@@ -117,15 +131,22 @@ namespace Movement
             //Debug.Log("Dashing");
             canDash = false;
             isDashing = true;
+            playerStat.isInvincible = true;
 
-            rb.velocity = movementInput.normalized * (maxSpeed + 30);
+            rb.velocity = movementInput.normalized * (dashSpeed);
 
             yield return new WaitForSeconds(dashTime);
 
             //Debug.Log("Finish Dashing");
-            canDash = true;
             isDashing = false;
+            playerStat.isInvincible = false;
 
+            yield return new WaitForSeconds(dashCoolDown  - 0.1f);
+            spriteRenderer.color = Color.cyan;
+
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.color = Color.white;
+            canDash = true;
         }
     }
 
