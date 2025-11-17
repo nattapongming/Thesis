@@ -14,7 +14,7 @@ namespace Animation
 
             // Check horizontal velocity instead of input—super precise!
             float horizontalSpeed = rb.velocity.magnitude;
-            Debug.Log($"Speed = {rb.velocity}");
+            //Debug.Log($"Speed = {rb.velocity}");
             bool isWalking = horizontalSpeed > moveThreshold;
 
             // Toggle the animation: Walk if speedy, Idle if chill!

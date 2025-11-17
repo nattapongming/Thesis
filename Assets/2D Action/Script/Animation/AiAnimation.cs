@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AiAnimation : MonoBehaviour
+namespace Animation
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AiAnimation : CharacterAnimation
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 }

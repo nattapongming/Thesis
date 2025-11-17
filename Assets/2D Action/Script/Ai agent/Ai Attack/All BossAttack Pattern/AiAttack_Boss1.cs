@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Animation;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -50,6 +51,8 @@ public class AiAttack_Boss1 : AiAttack_Boss
         currentAttackPattern = GetRandomAttackPattern();
 
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        aiAnimation = GetComponent<AiAnimation>();
     }
 
     protected override void Update()
@@ -156,6 +159,9 @@ public class AiAttack_Boss1 : AiAttack_Boss
         yield return StartCoroutine(ChangeSpriteColor(0.25f));
         aiStat.UpdateSpeed(aiStat.speed);
 
+        aiAnimation.SetTrigger("JumpUp");
+        bool jumpDownTriggered = false;
+
         GameObject vfx = Instantiate(jumpingVFX);
         vfx.transform.position = transform.position;
 
@@ -175,16 +181,21 @@ public class AiAttack_Boss1 : AiAttack_Boss
         float progress = 0f;
         Vector2 lastPos = startPos;
 
+
         if (faceAlongCurve)
         {
             float initAngle = Mathf.Atan2(flightDir.y, flightDir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, initAngle);
         }
 
-        ChangeSprite(attackSprite1);
+        
         while (progress < 1f)
         {
-            if (progress > 0.5) ChangeSprite(attackSprite2);
+            if (progress > 0.5f && !jumpDownTriggered)
+            {
+                aiAnimation.SetParameter("IsJumpDown", true);
+                jumpDownTriggered = true;
+            }
 
             progress += (speed * Time.deltaTime) / actualDist;
             progress = Mathf.Clamp01(progress);
@@ -208,7 +219,10 @@ public class AiAttack_Boss1 : AiAttack_Boss
         }
 
         transform.position = endPos;
-        ResumeAnimation();
+
+        aiAnimation.SetParameter("IsJumpDown", false);
+        jumpDownTriggered = false;
+        
     }
     IEnumerator SimpleAttackCoroutine(GameObject patternGO, float duration, bool rotateBulletByDir)
     {
@@ -268,16 +282,6 @@ public class AiAttack_Boss1 : AiAttack_Boss
         aiStat.UpdateSpeed(aiStat.speed);
     }
 
-    protected void ChangeSprite(Sprite sprite)
-    {
-        /*animator.speed = 0f;
-        spriteRenderer.sprite = sprite;*/
-    }
 
-    protected void ResumeAnimation()
-    {
-        spriteRenderer.sprite = null;
-        animator.speed = 1f;
-    }
     
 }

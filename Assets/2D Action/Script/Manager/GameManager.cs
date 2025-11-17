@@ -13,10 +13,11 @@ namespace Manager
     {
         public static GameManager Instance { get; private set; }
 
+        [Header("Game setting")]
         public Difficulty curDifficulty = Difficulty.Normal;
         public GamePauseType pauseType = GamePauseType.None;
 
-        //other manager
+        [Header("Other manager")]
         public LevelStatManager levelStatManager;
         public LevelRating levelRating;
         public LevelResetManager levelResetManager;
@@ -26,7 +27,7 @@ namespace Manager
 
         public InventoryUiManager inventoryUiManager;
 
-        // other gameobject
+        [Header("Other Game Object")]
         public GameObject player;
         public GameObject inventoryUi;
 
@@ -71,22 +72,22 @@ namespace Manager
                 case GamePauseType.None:
                     pauseUi.SetActive(false);
                     inventoryUi.SetActive(false);
-                    UadatePauseSetting(1, true, false);
+                    UpdatePauseSetting(1, true, false);
                     break;
 
                 case GamePauseType.Pause:
                     pauseUi.SetActive(true);
-                    UadatePauseSetting(0, false, true);
+                    UpdatePauseSetting(0, false, true);
                     break;
 
                 case GamePauseType.EndLevel:
 
-                    UadatePauseSetting(0, false, false);
+                    UpdatePauseSetting(0, false, false);
                     break;
             }
         }
 
-        private void UadatePauseSetting(int timescale, bool isSetActivePlayerInput, bool isSetPauseUiActive)
+        private void UpdatePauseSetting(int timescale, bool isSetActivePlayerInput, bool isSetPauseUiActive)
         {
             Time.timeScale = timescale;
             playerinput.enabled = isSetActivePlayerInput;

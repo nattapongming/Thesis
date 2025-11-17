@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Sprites;
+using Animation;
 
 public class AiAttack_Boss : AiAttack
 {
@@ -12,12 +13,13 @@ public class AiAttack_Boss : AiAttack
 
     [SerializeField] protected int currentAttackPattern = 0;
 
+    [Header("Other component")]
+    [SerializeField] protected AiAnimation aiAnimation;
     [SerializeField] protected SpriteRenderer spriteRenderer;
-    [SerializeField] protected Animator animator;
     virtual protected int GetRandomAttackPattern()
     {
         if (numberOfPattern <= 0) return -1;
-        else if (numberOfPattern == 1) return 0;
+        else if (numberOfPattern == 1) return 3;
         int newPattern;
         do
         {
