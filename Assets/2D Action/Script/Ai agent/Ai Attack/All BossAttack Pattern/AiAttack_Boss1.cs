@@ -48,6 +48,7 @@ public class AiAttack_Boss1 : AiAttack_Boss
     protected override void Start()
     {
         base.Start();
+        spriteRenderer.flipX = true;
         currentAttackPattern = GetRandomAttackPattern();
 
         rb = GetComponent<Rigidbody2D>();

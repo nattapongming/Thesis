@@ -11,8 +11,9 @@ public class EnemySpawner : MonoBehaviour
     GameManager gameManager;
     LevelDifficultlyManager levelDifficultlyManager;
 
-    [SerializeField] private Tilemap spawnTilemap; 
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] protected Tilemap spawnTilemap; 
+    [SerializeField] protected GameObject enemyPrefab;
+    [SerializeField] protected RoomComponent partOfRoomComponent;
 
     [SerializeField] private int spawnCountPerInterval = 4;
     [SerializeField] private float spawnInterval = 3f;
@@ -31,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
         public int cost;
     }
 
-    void Start()
+    virtual protected void Start()
     {
         gameManager = GameManager.Instance;
         levelDifficultlyManager = gameManager.levelStatManager.gameObject.GetComponent<LevelDifficultlyManager>();
@@ -48,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
         InvokeRepeating(nameof(SpawnEnemy), 0f, spawnInterval);
     }
 
-    private void CollectSpawnPositions()
+    protected void CollectSpawnPositions()
     {
         BoundsInt bounds = spawnTilemap.cellBounds;
 
@@ -118,9 +119,10 @@ public class EnemySpawner : MonoBehaviour
                 break;
         }
     }
-    public void StartSpawn()
+    public void StartSpawn(RoomComponent roomComponent)
     {
         spawnValue = levelDifficultlyManager.enemySpawnDifficulty;
+        partOfRoomComponent = roomComponent;
 
         InvokeRepeating(nameof(SpawnEnemy), 0, spawnInterval);
     }

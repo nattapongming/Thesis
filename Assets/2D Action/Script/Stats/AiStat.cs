@@ -17,7 +17,8 @@ namespace Stats
         [SerializeField] float collisionDamage = 1;
 
         // Other called component
-        [HideInInspector] public EnemySpawn partOfSpawnArena;
+        [Header("Other Componet")]
+        public RoomComponent partOfRoomComponent;
 
         protected override void Start()
         {
@@ -39,12 +40,17 @@ namespace Stats
 
         protected override void Died()
         {
+            if (partOfRoomComponent != null)
+            {
+                partOfRoomComponent.activeEnemy.Remove(gameObject);
+                if (partOfRoomComponent.activeEnemy.Count <= 0) partOfRoomComponent.UpdateRoom();
+            }
             base.Died();
+
         }
 
         private void OnDestroy()
         {
-            if (partOfSpawnArena) partOfSpawnArena.enemySpawnNumber--;
             GameManager.Instance.levelResetManager.enemyGameObject.Remove(this.gameObject);
         }
 
