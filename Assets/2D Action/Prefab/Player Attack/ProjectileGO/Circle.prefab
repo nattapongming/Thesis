@@ -128,7 +128,7 @@ MonoBehaviour:
   speed: 12
   isMoveBaseOnDirection: 0
   isRotateBaseOnDirection: 0
-  lifeTime: 3
+  lifeTime: 1.5
   onHitDestory: 1
   direction: {x: 0, y: 0}
 --- !u!58 &292523131455789228
