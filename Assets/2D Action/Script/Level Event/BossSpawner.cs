@@ -26,7 +26,8 @@ public class BossSpawner : EnemySpawner
         if (bossGO.gameObject.activeSelf == false) bossGO.gameObject.SetActive(true);
         agent.SetNewTarget(GameManager.Instance.player.transform);
         aiAttack.target = GameManager.Instance.player.transform;
-        //aiStat.partOfRoomComponent.activeEnemy.Add(bossGO.gameObject);
+        aiStat.partOfRoomComponent = partOfRoomComponent;
+        aiStat.partOfRoomComponent.activeEnemy.Add(bossGO.gameObject);
     }
 
     void StartSpawnBoss()

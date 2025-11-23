@@ -43,6 +43,7 @@ namespace Stats
             if (partOfRoomComponent != null)
             {
                 partOfRoomComponent.activeEnemy.Remove(gameObject);
+                Debug.Log($"Dead, current active enemy in {partOfRoomComponent.gameObject} is {partOfRoomComponent.activeEnemy.Count}");
                 if (partOfRoomComponent.activeEnemy.Count <= 0) partOfRoomComponent.UpdateRoom();
             }
             base.Died();

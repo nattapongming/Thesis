@@ -26,7 +26,7 @@ public class RoomTrigger : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             partOfRoomComponent.StartRoom();
-            this.enabled = false;
+            enabled = false;
         }
     }
 }

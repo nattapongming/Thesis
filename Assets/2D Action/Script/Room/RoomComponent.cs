@@ -51,6 +51,7 @@ public class RoomComponent : MonoBehaviour
             default: return;
         }
 
+        isRoomStart = true;
         wallTileMapGO.SetActive(true);
     }
 
