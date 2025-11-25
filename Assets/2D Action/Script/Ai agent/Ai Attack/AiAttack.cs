@@ -30,6 +30,10 @@ public class AiAttack : MonoBehaviour
     [Header("Targeting")]
     [SerializeField] protected LayerMask wallLayerMask = 1 << 8;  // Layer 8 only - set in Inspector if needed!
 
+    [Header("Lunge Attack")]
+    [SerializeField] protected float lungeDistance = 4f;     
+    [SerializeField] protected float lungeSpeed = 25f;       
+
     protected GameManager gameManager;
     protected AiStat  aiStat;
     [SerializeField] protected AiAgent agent;
@@ -103,20 +107,20 @@ public class AiAttack : MonoBehaviour
         if (wallHit.collider != null)
         {
             int hitLayer = wallHit.collider.gameObject.layer;
-            Debug.Log($"Wall hit is {wallHit.collider.gameObject.name} and layer is {hitLayer} (mask value: {wallLayerMask.value})");
+            //Debug.Log($"Wall hit is {wallHit.collider.gameObject.name} and layer is {hitLayer} (mask value: {wallLayerMask.value})");
 
             bool isWallLayer = (wallLayerMask.value & (1 << hitLayer)) != 0;
             bool isWallTag = wallHit.collider.CompareTag("Wall");
             
             if (isWallLayer && isWallTag) 
             {
-                Debug.DrawRay(transform.position, direction * dist, Color.red, 0.5f);
+                //Debug.DrawRay(transform.position, direction * dist, Color.red, 0.5f);
                 return; 
             }
         }
 
         ShootAttack(attackPattern, direction);
-        Debug.DrawRay(transform.position, direction * dist, Color.green, 0.5f);
+        //Debug.DrawRay(transform.position, direction * dist, Color.green, 0.5f);
     }
 
     protected void ShootAttack(GameObject prefab, Vector2 direction)
@@ -157,4 +161,35 @@ public class AiAttack : MonoBehaviour
         }
     }
 
+    protected void LungeAttack(Vector2 dir, float distance, float lungeSpeed)
+    {
+        dir = dir.normalized;
+        StartCoroutine(LungeAttackCoroutine(dir, distance, lungeSpeed));
+
+    }
+
+    protected IEnumerator LungeAttackCoroutine(Vector2 direction, float distance, float lungeSpeed)
+    {
+        Transform cachedTarget = agent.target;
+        agent.SetNewTarget(null);
+
+        Vector2 startPos = transform.position;
+        Vector2 targetPos = startPos + direction * distance;
+
+        float timer = 0f;
+        float duration = distance / lungeSpeed;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / duration;
+            transform.position = Vector3.Lerp(startPos, targetPos, t);
+
+            yield return null;
+        }
+
+        transform.position = targetPos;
+
+        agent.SetNewTarget(cachedTarget);
+    }
 }

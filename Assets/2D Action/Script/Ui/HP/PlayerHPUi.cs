@@ -5,12 +5,13 @@ using UnityEngine.Sprites;
 using Stats;
 using Manager;
 using System;
+using UnityEngine.UI;
 
 namespace Ui
 {
     public class PlayerHPUi : MonoBehaviour
     {
-        [SerializeField] SpriteRenderer[] playerHpSpriteSlot;
+        [SerializeField] Image[] playerHpSpriteSlot;
         [SerializeField] Sprite playerHpSprite;
         [SerializeField] Sprite playerHpEmptySprite;
 
@@ -20,6 +21,9 @@ namespace Ui
         void Start()
         {
             playerStat = GameManager.Instance.player.GetComponent<PlayerStat>();
+            maxUiHP = Mathf.FloorToInt(playerStat.maxHp);  
+            curUiHP = maxUiHP;                             
+            UpdateAllSlots();
         }
 
         // Update is called once per frame
@@ -30,31 +34,37 @@ namespace Ui
 
         public void UpdateHPUi()
         {
-            if (playerStat.curHp == curUiHP) return;
+            int targetUiHP = Mathf.FloorToInt(playerStat.curHp);
+            if (targetUiHP == curUiHP) return;
 
-            int curUiHPindex = curUiHP--;
-            int curHPindex = Mathf.FloorToInt(playerStat.curHp--);
-            int diffIndex = curUiHPindex - curHPindex;
-            if (diffIndex == 0) return;
-
-            if (diffIndex > 0 && curUiHP < maxUiHP)
+            // Demage empty the slot
+            if (targetUiHP < curUiHP)
             {
-                do
+                for (int i = curUiHP - 1; i >= targetUiHP; i--)
                 {
-                    curHPindex++;
-                    playerHpSpriteSlot[curHPindex].sprite = playerHpSprite;
-                    diffIndex--;
-                } while (diffIndex > 0 || curUiHP < maxUiHP);
+                    playerHpSpriteSlot[i].sprite = playerHpEmptySprite;
+                }
             }
-            else if (diffIndex < 0 && curUiHP > 0)
+
+            // Heal fill the slot
+            if (targetUiHP > curUiHP)
             {
-                do
+                for (int i = curUiHP; i < targetUiHP; i++)
                 {
-                    diffIndex = -diffIndex;
-                    curHPindex--;
-                    playerHpSpriteSlot[curHPindex].sprite = playerHpSprite;
-                    diffIndex--;
-                } while (diffIndex > 0 || curUiHP > 0);
+                    playerHpSpriteSlot[i].sprite = playerHpSprite;
+                }
+            }
+            
+        }
+
+        private void UpdateAllSlots()
+        {
+            for (int i = 0; i < playerHpSpriteSlot.Length; i++)
+            {
+                if (i < curUiHP)
+                    playerHpSpriteSlot[i].sprite = playerHpSprite;
+                else
+                    playerHpSpriteSlot[i].sprite = playerHpEmptySprite;
             }
         }
     }

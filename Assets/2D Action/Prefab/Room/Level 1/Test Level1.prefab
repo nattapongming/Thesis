@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &477727500369338672
 Transform:
   m_ObjectHideFlags: 0
@@ -293,7 +293,17 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 3977867890031155377}
+    m_ColliderPaths:
+    - - X: 10000000
+        Y: 10000000
+      - X: 0
+        Y: 10000000
+      - X: 0
+        Y: -10000000
+      - X: 10000000
+        Y: -10000000
   m_CompositePaths:
     m_Paths:
     - - {x: 0.99997073, y: -1}
@@ -369,7 +379,7 @@ GameObject:
   - component: {fileID: -1565308801975483645}
   - component: {fileID: 1967084662904941016}
   m_Layer: 0
-  m_Name: Boss Room
+  m_Name: Test Level1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

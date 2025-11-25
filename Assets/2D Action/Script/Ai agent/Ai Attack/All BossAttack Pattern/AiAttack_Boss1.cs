@@ -8,8 +8,8 @@ public class AiAttack_Boss1 : AiAttack_Boss
 {
     [Header("Lunge Attack")]
     [SerializeField] float lungeAttackcurveHeightMultiplier = 0.1f;
-    [SerializeField] float lungeDistance = 6.5f;
-    [SerializeField] float lungeSpeed = 8f;
+    [SerializeField] float bossLungeDistance = 6.5f;
+    [SerializeField] float bossLungeSpeed = 8f;
     [SerializeField] bool lungeFaceAlongCurve = false;
     [SerializeField] GameObject afterLungeAttackPatternGO;
 
@@ -98,7 +98,7 @@ public class AiAttack_Boss1 : AiAttack_Boss
     IEnumerator LungeCoroutine()
     {
         Vector2 lungeDir = (target.transform.position - transform.position).normalized;
-        yield return StartCoroutine(CurvedAttackCoroutine(lungeSpeed, lungeDistance, lungeAttackcurveHeightMultiplier, lungeFaceAlongCurve));
+        yield return StartCoroutine(CurvedAttackCoroutine(bossLungeSpeed, bossLungeDistance, lungeAttackcurveHeightMultiplier, lungeFaceAlongCurve));
         int phase = GetCurrentPhase();
         if (phase >= 1 && afterLungeAttackPatternGO != null && agent.target != null)
         {
