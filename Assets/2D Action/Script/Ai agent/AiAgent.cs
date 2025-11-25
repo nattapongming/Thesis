@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,45 +9,77 @@ namespace Ai
     {
         public Transform target;
 
-        NavMeshAgent agent;
+        [HideInInspector] public NavMeshAgent nevMeshAgent;
         Rigidbody2D rb;
-        AiAttack aiTurret;
-
+        AiAttack aiAttack;
+        SpriteRenderer spriteRenderer;
 
         private Vector2 lastTargetPosition;
         private Vector2 lastSelfPosition;
+        private int lastFacing = 1; // 1 = right, -1 = left
+
+        private void Awake()
+        {
+            nevMeshAgent = GetComponent<NavMeshAgent>();
+
+            nevMeshAgent.angularSpeed = 9999f;
+            nevMeshAgent.acceleration = 9999f;
+            nevMeshAgent.stoppingDistance = 0.5f;
+
+            nevMeshAgent.autoBraking = false;
+            nevMeshAgent.autoRepath = true;
+
+            nevMeshAgent.updateRotation = false;
+            nevMeshAgent.updateUpAxis = false;
+            nevMeshAgent.updatePosition = false;
+            
+        }
 
         // Start is called before the first frame update
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
-            agent = GetComponent<NavMeshAgent>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
 
-            if (TryGetComponent<AiAttack>(out aiTurret))
+            if (TryGetComponent<AiAttack>(out aiAttack))
             {
-                aiTurret = GetComponent<AiAttack>();
-                aiTurret.target = target;
+                aiAttack = GetComponent<AiAttack>();
+                aiAttack.target = target;
             }
 
-            agent.updateRotation = false;
-            agent.updateUpAxis = false;
-            agent.updatePosition = false;
+            
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (aiTurret) aiTurret.target = target;
-            SetNewTarget(target);
+            if (aiAttack) aiAttack.target = target;
+
+            if (target != null)
+                SetNewTarget(target);
             //RotateTowardsMovement();
-            
-            if (agent.remainingDistance <= agent.stoppingDistance + 0.05f)
+
+            if (nevMeshAgent.hasPath || nevMeshAgent.pathPending)
+            {
+                // Snap transform to agent
+                Vector3 navTargetPos = nevMeshAgent.nextPosition;
+                transform.position = navTargetPos;
+
+                Vector2 moveDir = nevMeshAgent.desiredVelocity.normalized;
+                if (moveDir.sqrMagnitude > 0.01f)
+                {
+                    lastFacing = moveDir.x > 0f ? 1 : -1;
+                    spriteRenderer.flipX = moveDir.x < 0f;
+                }
+                else
+                {
+                    spriteRenderer.flipX = lastFacing < 0;
+                }
+
+            }
+            else
             {
                 rb.velocity = Vector2.zero;
-            } else
-            {
-                Vector2 dir = (agent.steeringTarget - transform.position).normalized;
-                rb.velocity = dir * agent.speed;
             }
         }
 
@@ -61,14 +93,14 @@ namespace Ai
             {
                 lastSelfPosition = transform.position;
                 lastTargetPosition = target.position;
-                agent.SetDestination(target.position);
+                nevMeshAgent.SetDestination(target.position);
             }
 
         }
 
         private void RotateTowardsMovement()
         {
-            Vector2 moveDirection = agent.desiredVelocity.normalized;
+            Vector2 moveDirection = nevMeshAgent.desiredVelocity.normalized;
             if (moveDirection.sqrMagnitude > 0.01f) // Ensure AI is moving
             {
                 float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;

@@ -238,27 +238,31 @@ MonoBehaviour:
   target: {fileID: 0}
   range: 10
   turret: {fileID: 0}
+  aiAnimation: {fileID: 1180263069921199371}
+  spriteRenderer: {fileID: 3681910908984500017}
   baseAttackCooldown: 2.5
   minAttackCooldown: 0.5
   currentAttackCooldown: 0
   attackCurrentCooldown: 0
-  attackDelay: 0.5
   currentAttackDelay: 0
   bulletPrefab: {fileID: 0}
-  attackPattern: {fileID: 0}
+  attackPattern:
+  - {fileID: 0}
+  attackDelay: []
+  attackDelaySprite: []
   wallLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  lungeDistance: 4
+  lungeSpeed: 14
   agent: {fileID: 0}
   numberOfPattern: 1
   numberOfPhase: 3
   hpPercentPerPhase: 33.34
   currentAttackPattern: 0
-  aiAnimation: {fileID: 0}
-  spriteRenderer: {fileID: 3681910908984500017}
   lungeAttackcurveHeightMultiplier: 0.1
-  lungeDistance: 4
-  lungeSpeed: 14
+  bossLungeDistance: 6.5
+  bossLungeSpeed: 8
   lungeFaceAlongCurve: 0
   afterLungeAttackPatternGO: {fileID: 1302650134725094678, guid: 6ae8d3649b9e76442adbde492ac7f728, type: 3}
   swordSwingDuration: 0.25

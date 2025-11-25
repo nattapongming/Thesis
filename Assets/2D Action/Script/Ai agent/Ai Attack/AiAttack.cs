@@ -1,18 +1,25 @@
-﻿using Manager;
+﻿using Ai;
+using Animation;
+using Bullet;
+using Manager;
+using Movement;
+using Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ai;
-using Bullet;
-using Stats;
-using Movement;
 
 public class AiAttack : MonoBehaviour
 {
+    protected enum AttackPatternType { Shoot, Lunge }
+
     [Header("Info")]
     public Transform target;
     [SerializeField] float range = 1f;
     [SerializeField] GameObject turret;
+
+    [Header("Other component")]
+    [SerializeField] protected AiAnimation aiAnimation;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
 
     [Header("AttackSpeed")]
     [SerializeField] protected float baseAttackCooldown = 2f;
@@ -20,22 +27,27 @@ public class AiAttack : MonoBehaviour
     [SerializeField] protected float currentAttackCooldown;
     [SerializeField] protected float attackCurrentCooldown = 0f;
 
-    [SerializeField] protected float attackDelay = 0.5f;
     [SerializeField] protected float currentAttackDelay = 0f;
 
     [Header("Attack pattern")]
-    [SerializeField] protected GameObject bulletPrefab;
-    [SerializeField] protected GameObject attackPattern;
+    //[SerializeField] protected GameObject bulletPrefab;
+    [SerializeField] protected GameObject[] attackPattern;
+    [SerializeField] protected float[] attackDelay;
+    [SerializeField] protected Sprite[] attackDelaySprite;
+    [SerializeField] protected AttackPatternType[] attackPatternTypes = new AttackPatternType[] { AttackPatternType.Shoot };
 
     [Header("Targeting")]
     [SerializeField] protected LayerMask wallLayerMask = 1 << 8;  // Layer 8 only - set in Inspector if needed!
 
     [Header("Lunge Attack")]
-    [SerializeField] protected float lungeDistance = 4f;     
-    [SerializeField] protected float lungeSpeed = 25f;       
+    [SerializeField] protected float lungeDistance = 4f;
+    [SerializeField] protected float lungeSpeed = 25f;
+    [SerializeField] protected float lungeDelay = 0.5f;
+
+
 
     protected GameManager gameManager;
-    protected AiStat  aiStat;
+    protected AiStat aiStat;
     [SerializeField] protected AiAgent agent;
 
     protected Vector3 direction;
@@ -47,17 +59,20 @@ public class AiAttack : MonoBehaviour
         gameManager = GameManager.Instance;
 
         if (!agent) agent = GetComponent<AiAgent>();
-        if (!aiStat) aiStat = GetComponent <AiStat>();
+        if (!aiStat) aiStat = GetComponent<AiStat>();
+        if (!aiAnimation) aiAnimation = GetComponent<AiAnimation>();
+        if (!spriteRenderer) spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     virtual protected void Update()
     {
-        attackCurrentCooldown += Time.deltaTime;
+        if (!aiStat.isAttacking)
+            attackCurrentCooldown += Time.deltaTime;
 
         if (attackCurrentCooldown >= GetEffectiveAttackCooldown() && CheckTargetRange())
         {
-            attackCurrentCooldown = 0f; 
+            attackCurrentCooldown = 0f;
             CheckForTarget();
         }
 
@@ -71,7 +86,7 @@ public class AiAttack : MonoBehaviour
         //if (modifiers.Length > 0) Debug.Log("Have ")
         foreach (AiAtkSpeedModifier mod in modifiers)
         {
-            effective -= mod.GetCooldownReduction();  
+            effective -= mod.GetCooldownReduction();
         }
         currentAttackCooldown = Mathf.Max(minAttackCooldown, effective);
         return Mathf.Max(minAttackCooldown, effective);
@@ -89,14 +104,15 @@ public class AiAttack : MonoBehaviour
 
         if (dist > range)
         {
-            Debug.DrawRay(transform.position, direction * range, Color.yellow, 0.5f);  // Only draw when outta range!
-            return false; 
+            Debug.DrawRay(transform.position, direction * range, Color.red, 0.5f);  // Only draw when outta range!
+            return false;
         }
 
+        //Debug.Log("target in range");
         return true;
     }
 
-    protected void CheckForTarget()
+    protected bool CheckForTarget()
     {
         Vector2 toTarget = (Vector2)(target.position - transform.position);
         float dist = toTarget.magnitude;
@@ -111,15 +127,16 @@ public class AiAttack : MonoBehaviour
 
             bool isWallLayer = (wallLayerMask.value & (1 << hitLayer)) != 0;
             bool isWallTag = wallHit.collider.CompareTag("Wall");
-            
-            if (isWallLayer && isWallTag) 
+
+            if (isWallLayer && isWallTag)
             {
                 //Debug.DrawRay(transform.position, direction * dist, Color.red, 0.5f);
-                return; 
+                return false;
             }
         }
 
-        ShootAttack(attackPattern, direction);
+        return true;
+        //ShootAttack(attackPattern[0], direction);
         //Debug.DrawRay(transform.position, direction * dist, Color.green, 0.5f);
     }
 
@@ -152,7 +169,7 @@ public class AiAttack : MonoBehaviour
     protected void ShootPattern(GameObject prefab, Vector2 dir)
     {
         if (prefab == null) return;
-        
+
         GameObject patternGO = Instantiate(prefab, transform);  // Child ok
         BulletPattern bulletPattern = patternGO.GetComponent<BulletPattern>();
         if (bulletPattern != null)
@@ -161,20 +178,27 @@ public class AiAttack : MonoBehaviour
         }
     }
 
-    protected void LungeAttack(Vector2 dir, float distance, float lungeSpeed)
+    protected void LungeAttack(Vector2 dir, float distance, float lungeSpeed, Sprite lungeDelaySprite)
     {
         dir = dir.normalized;
-        StartCoroutine(LungeAttackCoroutine(dir, distance, lungeSpeed));
-
+        StartCoroutine(LungeAttackCoroutine(dir, distance, lungeSpeed, lungeDelay, lungeDelaySprite));
     }
 
-    protected IEnumerator LungeAttackCoroutine(Vector2 direction, float distance, float lungeSpeed)
+    protected IEnumerator LungeAttackCoroutine(Vector2 directionIn, float distance, float lungeSpeed, float lungeDelay, Sprite lungeDelaySprite)
     {
+        aiStat.isAttacking = true;
         Transform cachedTarget = agent.target;
         agent.SetNewTarget(null);
+        aiStat.UpdateSpeed(0);
 
-        Vector2 startPos = transform.position;
-        Vector2 targetPos = startPos + direction * distance;
+        aiAnimation.OverrideSprite(lungeDelaySprite);
+        yield return new WaitForSeconds(lungeDelay);
+
+        aiAnimation.OverrideSprite(lungeDelaySprite);
+        aiAnimation.ResumeAnimator();
+
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = startPos + (Vector3)(directionIn.normalized * distance);
 
         float timer = 0f;
         float duration = distance / lungeSpeed;
@@ -190,6 +214,21 @@ public class AiAttack : MonoBehaviour
 
         transform.position = targetPos;
 
+        //agent.enabled = true;
+        agent.nevMeshAgent.nextPosition = transform.position;
         agent.SetNewTarget(cachedTarget);
+        aiStat.UpdateSpeed(aiStat.speed);
+        aiStat.isAttacking = false;
     }
+
+    // Misc Method
+    protected Vector2 GetDirToTarget(Transform target)
+    {
+        target ??= this.target;
+        if (target == null) return Vector2.zero;
+
+        Vector2 dir = (target.position - transform.position);
+        return dir.normalized;
+    }
+
 }

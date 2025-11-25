@@ -13,7 +13,7 @@ namespace Animation
 
         [SerializeField] protected Sprite curSprite;
         [SerializeField] protected bool isMoving;
-        [SerializeField] protected float speed;
+        [SerializeField] protected float animationSpeed;
         // Start is called before the first frame update
         virtual protected void Start()
         {
@@ -25,7 +25,7 @@ namespace Animation
         // Update is called once per frame
         virtual protected void Update()
         {
-            speed = animator.speed;
+            animationSpeed = animator.speed;
             curSprite = spriteRenderer.sprite;
         }
 

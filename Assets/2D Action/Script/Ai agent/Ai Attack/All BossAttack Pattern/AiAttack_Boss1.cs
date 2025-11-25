@@ -58,12 +58,6 @@ public class AiAttack_Boss1 : AiAttack_Boss
 
     protected override void Update()
     {
-        float horizontalVel = rb.velocity.x;
-        if (Mathf.Abs(horizontalVel) > 0.1f)
-        {
-            bool facingRight = horizontalVel > 0;
-            spriteRenderer.flipX = !facingRight;  
-        }
 
         if (!aiStat.isAttacking)
         attackCurrentCooldown += Time.deltaTime;
@@ -97,7 +91,7 @@ public class AiAttack_Boss1 : AiAttack_Boss
     
     IEnumerator LungeCoroutine()
     {
-        Vector2 lungeDir = (target.transform.position - transform.position).normalized;
+        Vector2 lungeDir = GetDirToTarget(target);
         yield return StartCoroutine(CurvedAttackCoroutine(bossLungeSpeed, bossLungeDistance, lungeAttackcurveHeightMultiplier, lungeFaceAlongCurve));
         int phase = GetCurrentPhase();
         if (phase >= 1 && afterLungeAttackPatternGO != null && agent.target != null)
@@ -221,6 +215,7 @@ public class AiAttack_Boss1 : AiAttack_Boss
 
         transform.position = endPos;
 
+        agent.nevMeshAgent.nextPosition = transform.position;
         aiAnimation.SetParameter("IsJumpDown", false);
         jumpDownTriggered = false;
         

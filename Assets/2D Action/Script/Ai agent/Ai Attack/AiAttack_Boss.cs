@@ -13,9 +13,7 @@ public class AiAttack_Boss : AiAttack
 
     [SerializeField] protected int currentAttackPattern = 0;
 
-    [Header("Other component")]
-    [SerializeField] protected AiAnimation aiAnimation;
-    [SerializeField] protected SpriteRenderer spriteRenderer;
+    
     virtual protected int GetRandomAttackPattern()
     {
         if (numberOfPattern <= 0) return -1;
