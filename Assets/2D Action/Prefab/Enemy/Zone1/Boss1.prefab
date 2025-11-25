@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  nevMeshAgent: {fileID: 0}
 --- !u!114 &1633711641170591722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487d98d54dab21d45ae3e3a99e44ab1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 150
+  maxHp: 40
   atk: 1
   speed: 2
   faction: 1
@@ -245,16 +246,17 @@ MonoBehaviour:
   currentAttackCooldown: 0
   attackCurrentCooldown: 0
   currentAttackDelay: 0
-  bulletPrefab: {fileID: 0}
   attackPattern:
   - {fileID: 0}
   attackDelay: []
   attackDelaySprite: []
+  attackPatternTypes: 00000000
   wallLayerMask:
     serializedVersion: 2
     m_Bits: 256
   lungeDistance: 4
   lungeSpeed: 14
+  lungeDelay: 0.5
   agent: {fileID: 0}
   numberOfPattern: 1
   numberOfPhase: 3
@@ -301,7 +303,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   curSprite: {fileID: 0}
   isMoving: 0
-  speed: 0
+  animationSpeed: 0
 --- !u!114 &8008067035680126152
 MonoBehaviour:
   m_ObjectHideFlags: 0

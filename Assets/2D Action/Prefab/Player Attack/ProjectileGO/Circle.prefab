@@ -103,7 +103,7 @@ MonoBehaviour:
   attackType: 1
   attackSprite: {fileID: 21300000, guid: 1024f75795206cf4baa18d72380aa8e5, type: 3}
   spriteGO: {fileID: 0}
-  damage: 500
+  damage: 1
   managain: 0
   attackCoolDown: 0.5
   ogDamage: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7847c33c867447541991ac16d8f33d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 24
   isMoveBaseOnDirection: 0
   isRotateBaseOnDirection: 0
   lifeTime: 1.5

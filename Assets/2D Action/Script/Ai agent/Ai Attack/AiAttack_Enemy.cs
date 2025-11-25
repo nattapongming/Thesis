@@ -25,6 +25,8 @@ public class AiAttack_Enemy : AiAttack
 
     protected override void Update()
     {
+        if (aiStat.isAttacking) return;
+
         float horizontalVel = rb.velocity.x;
         if (Mathf.Abs(horizontalVel) > 0.1f)
         {
@@ -79,7 +81,7 @@ public class AiAttack_Enemy : AiAttack
 
     private void CheckAttackPatternType(int index)
     {
-        Debug.Log($"Attacking by {attackPatternTypes[index]}");
+        //Debug.Log($"Attacking by {attackPatternTypes[index]}");
 
         switch (attackPatternTypes[index])
         {

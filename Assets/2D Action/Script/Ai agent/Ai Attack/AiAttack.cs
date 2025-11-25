@@ -194,8 +194,8 @@ public class AiAttack : MonoBehaviour
         aiAnimation.OverrideSprite(lungeDelaySprite);
         yield return new WaitForSeconds(lungeDelay);
 
-        aiAnimation.OverrideSprite(lungeDelaySprite);
         aiAnimation.ResumeAnimator();
+        aiAnimation.SetTrigger("Attack");
 
         Vector3 startPos = transform.position;
         Vector3 targetPos = startPos + (Vector3)(directionIn.normalized * distance);
