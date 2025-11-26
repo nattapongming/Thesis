@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 34d1279781c425e44a25881d524e30d7
+guid: 6a43e1c75b8723f4fa05e8a7831dfdda
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -93,43 +93,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_0
+      name: Spawning flame_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 258
-        height: 258
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42623a0c8652d42468812c3fc4fb0628
-      internalID: 1888039374
+      spriteID: 4d589b72f76fa934ab721e6d8feb5a10
+      internalID: 1712143609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_1
+      name: Spawning flame_1
       rect:
         serializedVersion: 2
-        x: 258
+        x: 64
         y: 0
-        width: 258
-        height: 258
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01a72207f9b8a02449c991d1348f1dbd
-      internalID: 794278632
+      spriteID: fdc357f7f20454c438edec9cde49ead1
+      internalID: 588008302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_2
+      name: Spawning flame_2
       rect:
         serializedVersion: 2
-        x: 516
+        x: 128
         y: 0
-        width: 258
-        height: 258
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea84307533f5d674dbb889f169e4bf56
-      internalID: -847959686
+      spriteID: 9065ddd6c5cb49244a20b17d008bbc72
+      internalID: -638987907
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_3
+      name: Spawning flame_3
       rect:
         serializedVersion: 2
-        x: 774
+        x: 192
         y: 0
-        width: 258
-        height: 258
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60a67d3a3f7ff684ea2ff5210005ba0e
-      internalID: -422153525
+      spriteID: eb0fccea03d25014b82f2b65f4517c3b
+      internalID: 508028126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_4
+      name: Spawning flame_4
       rect:
         serializedVersion: 2
-        x: 1032
+        x: 256
         y: 0
-        width: 258
-        height: 258
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +195,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6d2492173fcd2741a6bb0dc4bd3352b
-      internalID: 1257865476
+      spriteID: 1936312ae9ea99d46b666a131896ef19
+      internalID: -2055879140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_5
+      name: Spawning flame_5
       rect:
         serializedVersion: 2
-        x: 1290
+        x: 320
         y: 0
-        width: 258
-        height: 258
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,20 +216,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d613361a24c154e4187dcff7ef1b787f
-      internalID: 1260424584
+      spriteID: 0354956abf56e5d4e9e626f9d951348c
+      internalID: -1971907392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_6
+      name: Spawning flame_6
       rect:
         serializedVersion: 2
-        x: 1548
+        x: 384
         y: 0
-        width: 258
-        height: 258
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b27def623c7b3b40b992be62881c890
-      internalID: -351120416
+      spriteID: 6986951a0b4c40042a76f4c1d6deafe5
+      internalID: 2030648073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_7
+      name: Spawning flame_7
       rect:
         serializedVersion: 2
-        x: 1806
+        x: 448
         y: 0
-        width: 258
-        height: 258
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,20 +258,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3426a062d80bf714a8a6f8ff396b7328
-      internalID: 173744219
+      spriteID: c64566d90f8babd498218458076fb914
+      internalID: -1316849823
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_8
+      name: Spawning flame_8
       rect:
         serializedVersion: 2
-        x: 2064
+        x: 512
         y: 0
-        width: 258
-        height: 258
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -305,20 +279,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd881bb30d6ef34409d4d5b7cc545baa
-      internalID: -1039100979
+      spriteID: 4aac4642bd53983438c832151dbe9128
+      internalID: 686741137
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_9
+      name: Spawning flame_9
       rect:
         serializedVersion: 2
-        x: 2322
+        x: 576
         y: 0
-        width: 258
-        height: 258
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,20 +300,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7fd9093a6eb81b48b66c0aeb7a012e8
-      internalID: 1727771182
+      spriteID: f6fd0052f9ab3204294f7adce0fe1a03
+      internalID: -1651650168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_10
+      name: Spawning flame_10
       rect:
         serializedVersion: 2
-        x: 2580
+        x: 640
         y: 0
-        width: 258
-        height: 258
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,29 +321,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15519195cb869244e87083269232588b
-      internalID: -2090792466
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimebossJumpPixel258_11
-      rect:
-        serializedVersion: 2
-        x: 2838
-        y: 0
-        width: 258
-        height: 258
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2376d744778b653488c6d6b3dd7ed116
-      internalID: -1715097664
+      spriteID: 4b7b7b76134d45e45b7a13240e20fc11
+      internalID: -1651122636
       vertices: []
       indices: 
       edges: []
@@ -385,18 +338,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SlimebossJumpPixel258_0: 1888039374
-      SlimebossJumpPixel258_1: 794278632
-      SlimebossJumpPixel258_10: -2090792466
-      SlimebossJumpPixel258_11: -1715097664
-      SlimebossJumpPixel258_2: -847959686
-      SlimebossJumpPixel258_3: -422153525
-      SlimebossJumpPixel258_4: 1257865476
-      SlimebossJumpPixel258_5: 1260424584
-      SlimebossJumpPixel258_6: -351120416
-      SlimebossJumpPixel258_7: 173744219
-      SlimebossJumpPixel258_8: -1039100979
-      SlimebossJumpPixel258_9: 1727771182
+      Spawning flame_0: 1712143609
+      Spawning flame_1: 588008302
+      Spawning flame_10: -1651122636
+      Spawning flame_2: -638987907
+      Spawning flame_3: 508028126
+      Spawning flame_4: -2055879140
+      Spawning flame_5: -1971907392
+      Spawning flame_6: 2030648073
+      Spawning flame_7: -1316849823
+      Spawning flame_8: 686741137
+      Spawning flame_9: -1651650168
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -102,9 +102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faction: 1
   attackType: 1
-  attackSprite: {fileID: 21300000, guid: 1024f75795206cf4baa18d72380aa8e5, type: 3}
+  attackSprite: {fileID: 0}
   spriteGO: {fileID: 0}
-  damage: -1
+  damage: 1
   managain: 0.1
   attackCoolDown: 0.5
   ogDamage: 0
@@ -157,7 +157,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307510706613561669}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

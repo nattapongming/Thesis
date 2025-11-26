@@ -6,7 +6,6 @@ using UnityEngine;
 public class AiAttack_Enemy : AiAttack
 {
     enum ChangeSelectAttackPatternType { Random, InOrder}
-    Rigidbody2D rb;
 
 
     [Header("Basic Enemy Attack Pattern")]
@@ -19,8 +18,7 @@ public class AiAttack_Enemy : AiAttack
     {
         base.Start();
 
-        rb = GetComponent<Rigidbody2D>();
-        Debug.Log($"This enemy has {numberAttackPattern} attack pattern");
+        //Debug.Log($"This enemy has {numberAttackPattern} attack pattern");
     }
 
     protected override void Update()

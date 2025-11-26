@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 34d1279781c425e44a25881d524e30d7
+guid: a08c225e5374fbc4c97e16c25e7cf501
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,37 +93,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_0
+      name: SlimebossSlash-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42623a0c8652d42468812c3fc4fb0628
-      internalID: 1888039374
+      spriteID: 019c6f5cc4086be4dbb3431ae9599d78
+      internalID: 228359939
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_1
+      name: SlimebossSlash-Sheet_1
       rect:
         serializedVersion: 2
         x: 258
@@ -158,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01a72207f9b8a02449c991d1348f1dbd
-      internalID: 794278632
+      spriteID: 2693a8d643a93e34fad48cf53d2dab5a
+      internalID: 531898966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_2
+      name: SlimebossSlash-Sheet_2
       rect:
         serializedVersion: 2
         x: 516
@@ -179,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea84307533f5d674dbb889f169e4bf56
-      internalID: -847959686
+      spriteID: 69c68d4d9e42309488f64133f24a384a
+      internalID: 1234406280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_3
+      name: SlimebossSlash-Sheet_3
       rect:
         serializedVersion: 2
         x: 774
@@ -200,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60a67d3a3f7ff684ea2ff5210005ba0e
-      internalID: -422153525
+      spriteID: d2127f43498e5ea488dd2ea75f8b4f42
+      internalID: 2068970888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_4
+      name: SlimebossSlash-Sheet_4
       rect:
         serializedVersion: 2
         x: 1032
@@ -221,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6d2492173fcd2741a6bb0dc4bd3352b
-      internalID: 1257865476
+      spriteID: 442006f1db3512d48bb3f8e7998184ba
+      internalID: -759629648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_5
+      name: SlimebossSlash-Sheet_5
       rect:
         serializedVersion: 2
         x: 1290
@@ -242,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d613361a24c154e4187dcff7ef1b787f
-      internalID: 1260424584
+      spriteID: 5898b4ce04488974f83e9206c6ae59f2
+      internalID: 730602614
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_6
+      name: SlimebossSlash-Sheet_6
       rect:
         serializedVersion: 2
         x: 1548
@@ -263,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b27def623c7b3b40b992be62881c890
-      internalID: -351120416
+      spriteID: 398bf7c7f36d0a144b95f89e6afc8155
+      internalID: -1253617590
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_7
+      name: SlimebossSlash-Sheet_7
       rect:
         serializedVersion: 2
         x: 1806
@@ -284,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3426a062d80bf714a8a6f8ff396b7328
-      internalID: 173744219
+      spriteID: ff2d0fd19e4b9cf44b381d14f703981a
+      internalID: 409241169
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_8
+      name: SlimebossSlash-Sheet_8
       rect:
         serializedVersion: 2
         x: 2064
@@ -305,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd881bb30d6ef34409d4d5b7cc545baa
-      internalID: -1039100979
+      spriteID: 9221ed7fbb6c0094c8fb72239c72195a
+      internalID: 1279591643
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_9
+      name: SlimebossSlash-Sheet_9
       rect:
         serializedVersion: 2
         x: 2322
@@ -326,14 +300,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7fd9093a6eb81b48b66c0aeb7a012e8
-      internalID: 1727771182
+      spriteID: 6b1b78d9ec9ec9c4aa5556d5046cc776
+      internalID: 1001486226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_10
+      name: SlimebossSlash-Sheet_10
       rect:
         serializedVersion: 2
         x: 2580
@@ -347,14 +321,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15519195cb869244e87083269232588b
-      internalID: -2090792466
+      spriteID: 0274619ff59306d4791b28cd0fdbf312
+      internalID: -1479051420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_11
+      name: SlimebossSlash-Sheet_11
       rect:
         serializedVersion: 2
         x: 2838
@@ -368,8 +342,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2376d744778b653488c6d6b3dd7ed116
-      internalID: -1715097664
+      spriteID: 868a94dfa75714e4380a689f0803cd3f
+      internalID: -1819991435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimebossSlash-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 3096
+        y: 0
+        width: 258
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 325d15ef3e0ee1d42bed68a4fe2c8ba0
+      internalID: -1422860991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimebossSlash-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 3354
+        y: 0
+        width: 258
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19cf87a8e817405489ff006214c6a8e3
+      internalID: 1090206370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimebossSlash-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 3612
+        y: 0
+        width: 258
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d1d3734fd513234cb9cd01bc105ac72
+      internalID: 1365312175
       vertices: []
       indices: 
       edges: []
@@ -385,18 +422,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SlimebossJumpPixel258_0: 1888039374
-      SlimebossJumpPixel258_1: 794278632
-      SlimebossJumpPixel258_10: -2090792466
-      SlimebossJumpPixel258_11: -1715097664
-      SlimebossJumpPixel258_2: -847959686
-      SlimebossJumpPixel258_3: -422153525
-      SlimebossJumpPixel258_4: 1257865476
-      SlimebossJumpPixel258_5: 1260424584
-      SlimebossJumpPixel258_6: -351120416
-      SlimebossJumpPixel258_7: 173744219
-      SlimebossJumpPixel258_8: -1039100979
-      SlimebossJumpPixel258_9: 1727771182
+      SlimebossSlash-Sheet_0: 228359939
+      SlimebossSlash-Sheet_1: 531898966
+      SlimebossSlash-Sheet_10: -1479051420
+      SlimebossSlash-Sheet_11: -1819991435
+      SlimebossSlash-Sheet_12: -1422860991
+      SlimebossSlash-Sheet_13: 1090206370
+      SlimebossSlash-Sheet_14: 1365312175
+      SlimebossSlash-Sheet_2: 1234406280
+      SlimebossSlash-Sheet_3: 2068970888
+      SlimebossSlash-Sheet_4: -759629648
+      SlimebossSlash-Sheet_5: 730602614
+      SlimebossSlash-Sheet_6: -1253617590
+      SlimebossSlash-Sheet_7: 409241169
+      SlimebossSlash-Sheet_8: 1279591643
+      SlimebossSlash-Sheet_9: 1001486226
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

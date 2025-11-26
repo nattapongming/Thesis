@@ -49,6 +49,7 @@ public class AiAttack : MonoBehaviour
     protected GameManager gameManager;
     protected AiStat aiStat;
     [SerializeField] protected AiAgent agent;
+    protected Rigidbody2D rb;
 
     protected Vector3 direction;
 
@@ -58,6 +59,7 @@ public class AiAttack : MonoBehaviour
     {
         gameManager = GameManager.Instance;
 
+        if (!rb) rb = GetComponent<Rigidbody2D>();
         if (!agent) agent = GetComponent<AiAgent>();
         if (!aiStat) aiStat = GetComponent<AiStat>();
         if (!aiAnimation) aiAnimation = GetComponent<AiAnimation>();
@@ -191,7 +193,9 @@ public class AiAttack : MonoBehaviour
         agent.SetNewTarget(null);
         aiStat.UpdateSpeed(0);
 
-        aiAnimation.OverrideSprite(lungeDelaySprite);
+        if (lungeDelaySprite != null)
+            aiAnimation.OverrideSprite(lungeDelaySprite);
+
         yield return new WaitForSeconds(lungeDelay);
 
         aiAnimation.ResumeAnimator();
@@ -205,14 +209,15 @@ public class AiAttack : MonoBehaviour
 
         while (timer < duration)
         {
+            if (enabled == false) break;
             timer += Time.deltaTime;
             float t = timer / duration;
-            transform.position = Vector3.Lerp(startPos, targetPos, t);
+            rb.MovePosition(Vector3.Lerp(startPos, targetPos, t));
 
             yield return null;
         }
 
-        transform.position = targetPos;
+        rb.MovePosition(targetPos);
 
         //agent.enabled = true;
         agent.nevMeshAgent.nextPosition = transform.position;

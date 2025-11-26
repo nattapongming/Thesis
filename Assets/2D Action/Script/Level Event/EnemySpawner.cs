@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 using Manager;
 using Stats;
 using System.IO;
+using Unity.VisualScripting;
+using Ai;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -46,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
             totalSpawnWeight += option.spawnChance;
         } if (totalSpawnWeight <= 0f) Debug.LogWarning("No valid spawn chance, enemy won't spawn.");
 
-        InvokeRepeating(nameof(SpawnEnemy), 0f, spawnInterval);
+        InvokeRepeating(nameof(SpawnEnemy), 10f, spawnInterval);
     }
 
     protected void CollectSpawnPositions()
@@ -96,6 +98,10 @@ public class EnemySpawner : MonoBehaviour
             Vector3 spawnPos = spawnPositions[randomIndex];
 
             GameObject enemy = Instantiate(selected.prefab, spawnPos, Quaternion.identity);
+            enemy.GetComponent<AiAttack_Enemy>().target = GameManager.Instance.player.transform;
+            enemy.GetComponent<AiAgent>().SetNewTarget(GameManager.Instance.player.transform);
+
+            
             spawnValue -= selected.cost;
 
             attemptsPerInterval--;

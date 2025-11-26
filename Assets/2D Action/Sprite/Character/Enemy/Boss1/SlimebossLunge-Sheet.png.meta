@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 34d1279781c425e44a25881d524e30d7
+guid: aa390e0643153534b96f3e431878aced
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,37 +93,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_0
+      name: SlimebossLunge-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42623a0c8652d42468812c3fc4fb0628
-      internalID: 1888039374
+      spriteID: bcdbe0fe1f665494b950f3fd9c0e0c05
+      internalID: -1884403248
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_1
+      name: SlimebossLunge-Sheet_1
       rect:
         serializedVersion: 2
         x: 258
@@ -158,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01a72207f9b8a02449c991d1348f1dbd
-      internalID: 794278632
+      spriteID: 470fa5b863bf7b14d9b26acf484590f3
+      internalID: -330307633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_2
+      name: SlimebossLunge-Sheet_2
       rect:
         serializedVersion: 2
         x: 516
@@ -179,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea84307533f5d674dbb889f169e4bf56
-      internalID: -847959686
+      spriteID: 3b62adae3f636c043b0583556965b072
+      internalID: 1493678189
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_3
+      name: SlimebossLunge-Sheet_3
       rect:
         serializedVersion: 2
         x: 774
@@ -200,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60a67d3a3f7ff684ea2ff5210005ba0e
-      internalID: -422153525
+      spriteID: c63420d8371de344287d45c510221f17
+      internalID: 344221260
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_4
+      name: SlimebossLunge-Sheet_4
       rect:
         serializedVersion: 2
         x: 1032
@@ -221,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6d2492173fcd2741a6bb0dc4bd3352b
-      internalID: 1257865476
+      spriteID: 1b4bfed9539ee974c8131dd35fdada7d
+      internalID: 1052320545
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_5
+      name: SlimebossLunge-Sheet_5
       rect:
         serializedVersion: 2
         x: 1290
@@ -242,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d613361a24c154e4187dcff7ef1b787f
-      internalID: 1260424584
+      spriteID: 4fcb41e9ee82553429c6ae76c35e33ad
+      internalID: -872809876
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_6
+      name: SlimebossLunge-Sheet_6
       rect:
         serializedVersion: 2
         x: 1548
@@ -263,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b27def623c7b3b40b992be62881c890
-      internalID: -351120416
+      spriteID: edf10fbf387da2244b23e4b90fd7e3ec
+      internalID: -1169594175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_7
+      name: SlimebossLunge-Sheet_7
       rect:
         serializedVersion: 2
         x: 1806
@@ -284,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3426a062d80bf714a8a6f8ff396b7328
-      internalID: 173744219
+      spriteID: 69daf6e63c18de24ea6a8d3480a31f45
+      internalID: 1138024995
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_8
+      name: SlimebossLunge-Sheet_8
       rect:
         serializedVersion: 2
         x: 2064
@@ -305,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd881bb30d6ef34409d4d5b7cc545baa
-      internalID: -1039100979
+      spriteID: 37a1b82dd10febf4a8533d68ac50a634
+      internalID: 978678626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimebossJumpPixel258_9
+      name: SlimebossLunge-Sheet_9
       rect:
         serializedVersion: 2
         x: 2322
@@ -326,50 +300,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7fd9093a6eb81b48b66c0aeb7a012e8
-      internalID: 1727771182
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimebossJumpPixel258_10
-      rect:
-        serializedVersion: 2
-        x: 2580
-        y: 0
-        width: 258
-        height: 258
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 15519195cb869244e87083269232588b
-      internalID: -2090792466
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimebossJumpPixel258_11
-      rect:
-        serializedVersion: 2
-        x: 2838
-        y: 0
-        width: 258
-        height: 258
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2376d744778b653488c6d6b3dd7ed116
-      internalID: -1715097664
+      spriteID: 537a3efcd004b3d42949367f766b6cbb
+      internalID: 1965058401
       vertices: []
       indices: 
       edges: []
@@ -385,18 +317,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SlimebossJumpPixel258_0: 1888039374
-      SlimebossJumpPixel258_1: 794278632
-      SlimebossJumpPixel258_10: -2090792466
-      SlimebossJumpPixel258_11: -1715097664
-      SlimebossJumpPixel258_2: -847959686
-      SlimebossJumpPixel258_3: -422153525
-      SlimebossJumpPixel258_4: 1257865476
-      SlimebossJumpPixel258_5: 1260424584
-      SlimebossJumpPixel258_6: -351120416
-      SlimebossJumpPixel258_7: 173744219
-      SlimebossJumpPixel258_8: -1039100979
-      SlimebossJumpPixel258_9: 1727771182
+      SlimebossLunge-Sheet_0: -1884403248
+      SlimebossLunge-Sheet_1: -330307633
+      SlimebossLunge-Sheet_2: 1493678189
+      SlimebossLunge-Sheet_3: 344221260
+      SlimebossLunge-Sheet_4: 1052320545
+      SlimebossLunge-Sheet_5: -872809876
+      SlimebossLunge-Sheet_6: -1169594175
+      SlimebossLunge-Sheet_7: 1138024995
+      SlimebossLunge-Sheet_8: 978678626
+      SlimebossLunge-Sheet_9: 1965058401
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

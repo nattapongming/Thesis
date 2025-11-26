@@ -17,7 +17,7 @@ public class AiAttack_Boss : AiAttack
     virtual protected int GetRandomAttackPattern()
     {
         if (numberOfPattern <= 0) return -1;
-        else if (numberOfPattern == 1) return 3;
+        else if (numberOfPattern == 1) return 0;
         int newPattern;
         do
         {

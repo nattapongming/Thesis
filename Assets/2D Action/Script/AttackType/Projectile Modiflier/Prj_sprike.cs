@@ -31,16 +31,14 @@ namespace Projectile
             lifetime += Time.deltaTime;
             if (lifetime >= 67f) // Stage 3: Final sprite + enable collider
             {
-                
                 if (spikeSprites.Length > 1 && spikeSprites[2] != null)
                 {
                     spriteRenderer.sprite = spikeSprites[2];
                 }
-                boxCollider.enabled = true;
             }
             else if (lifetime >= 0.34f && lifetime < 67f) // Stage 2
             {
-                
+                boxCollider.enabled = true;
                 if (spikeSprites.Length > 1 && spikeSprites[1] != null)
                 {
                     spriteRenderer.sprite = spikeSprites[1];

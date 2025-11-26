@@ -30,6 +30,7 @@ namespace Manager
         [Header("Other Game Object")]
         public GameObject player;
         public GameObject inventoryUi;
+        public GameObject endLevelUi;
 
         [SerializeField] private bool isSetDifficultyOnThisScript;
         [SerializeField] private GameObject pauseUi;
@@ -81,7 +82,8 @@ namespace Manager
                     break;
 
                 case GamePauseType.EndLevel:
-
+                    levelStatManager.UpdateAllUi();
+                    endLevelUi.SetActive(true);
                     UpdatePauseSetting(0, false, false);
                     break;
             }

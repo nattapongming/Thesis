@@ -30,6 +30,8 @@ public class PlayerAttack : MonoBehaviour
             SetWeaponSprite(runtimeWeaponInstances[0].GetComponent<AttackStat>().attackSprite);
 
         }
+        curWeaponInstance = runtimeWeaponInstances[1];
+
     }
 
     private void Update()

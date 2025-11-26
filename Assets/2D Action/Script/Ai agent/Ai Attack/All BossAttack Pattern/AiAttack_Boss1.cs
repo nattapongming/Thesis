@@ -43,15 +43,12 @@ public class AiAttack_Boss1 : AiAttack_Boss
     [SerializeField] Sprite attackSprite1;
     [SerializeField] Sprite attackSprite2;
 
-    Rigidbody2D rb;
-
     protected override void Start()
     {
         base.Start();
         spriteRenderer.flipX = true;
         currentAttackPattern = GetRandomAttackPattern();
 
-        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         aiAnimation = GetComponent<AiAnimation>();
     }
