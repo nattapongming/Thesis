@@ -35,9 +35,19 @@ namespace Animation
             animator.Update(0f);
         }
 
-        public void SetTrigger(string parameter)
+        public void SetTrigger(string trigger)
         {
-            animator.SetTrigger(parameter);
+            animator.SetTrigger(trigger);
+            animator.Update(0f);
+        }
+
+        public IEnumerator SetParameterCouroutine(string parameter,bool value, float time)
+        {
+            animator.SetBool(parameter, value);
+            animator.Update(0f);
+            yield return new WaitForSeconds(time);
+
+            animator.SetBool(parameter, !value);
             animator.Update(0f);
         }
 

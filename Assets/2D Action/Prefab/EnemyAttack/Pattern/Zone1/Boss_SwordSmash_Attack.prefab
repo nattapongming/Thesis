@@ -48,8 +48,8 @@ MonoBehaviour:
   bulletPrefab:
   - {fileID: 248653727218510311, guid: 666c4e775387bc949bd6e1d6d0068739, type: 3}
   projectileMovement: {fileID: 0}
-  angle: 40
+  angle: 60
   accuracy: 100
   inAccuracyAngle: 50
   lifeTime: 0.5
-  pellet: 5
+  pellet: 4

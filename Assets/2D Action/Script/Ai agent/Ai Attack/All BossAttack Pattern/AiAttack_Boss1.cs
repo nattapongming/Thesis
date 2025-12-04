@@ -89,7 +89,7 @@ public class AiAttack_Boss1 : AiAttack_Boss
     IEnumerator LungeCoroutine()
     {
         Vector2 lungeDir = GetDirToTarget(target);
-        yield return StartCoroutine(CurvedAttackCoroutine(bossLungeSpeed, bossLungeDistance, lungeAttackcurveHeightMultiplier, lungeFaceAlongCurve));
+        yield return StartCoroutine(CurvedAttackCoroutine(bossLungeSpeed, bossLungeDistance, lungeAttackcurveHeightMultiplier, lungeFaceAlongCurve, "LungeDelay", false));
         int phase = GetCurrentPhase();
         if (phase >= 1 && afterLungeAttackPatternGO != null && agent.target != null)
         {
@@ -100,7 +100,7 @@ public class AiAttack_Boss1 : AiAttack_Boss
     }
     IEnumerator GroundPoundCoroutine()
     {
-        yield return StartCoroutine(CurvedAttackCoroutine(groundPoundSpeed, groundPoundDistance, groundPoundAttackcurveHeightMultiplier, groundPoundFaceAlongCurve));
+        yield return StartCoroutine(CurvedAttackCoroutine(groundPoundSpeed, groundPoundDistance, groundPoundAttackcurveHeightMultiplier, groundPoundFaceAlongCurve, "SlashDelay", true));
 
         int actualAttackBullet = (afterGroundPoundAttackPatternAmount * GetCurrentPhase());
         Debug.Log($"Shoot {afterGroundPoundAttackPatternAmount} curve attack!");
@@ -144,13 +144,21 @@ public class AiAttack_Boss1 : AiAttack_Boss
         yield return new WaitForSeconds(0.75f);
         aiStat.isAttacking = false;
     }
-    IEnumerator CurvedAttackCoroutine(float speed, float maxDist, float curveMult, bool faceAlongCurve)
+    IEnumerator CurvedAttackCoroutine(float speed, float maxDist, float curveMult, bool faceAlongCurve, string setBool, bool isChangeSpriteMidair)
     {
 
         aiStat.UpdateSpeed(0);
-        yield return StartCoroutine(ChangeSpriteColor(0.25f));
+        //return StartCoroutine(ChangeSpriteColor(0.25f));
         aiStat.UpdateSpeed(aiStat.speed);
 
+        if (isChangeSpriteMidair)
+        {
+
+        } else
+        {
+
+        }
+            aiAnimation.SetParameter(setBool, true);
         aiAnimation.SetTrigger("JumpUp");
         bool jumpDownTriggered = false;
 
@@ -183,7 +191,7 @@ public class AiAttack_Boss1 : AiAttack_Boss
         
         while (progress < 1f)
         {
-            if (progress > 0.5f && !jumpDownTriggered)
+            if (progress > 0.5f && !jumpDownTriggered && isChangeSpriteMidair)
             {
                 aiAnimation.SetParameter("IsJumpDown", true);
                 jumpDownTriggered = true;
@@ -227,7 +235,7 @@ public class AiAttack_Boss1 : AiAttack_Boss
 
         aiStat.UpdateSpeed(0f);
 
-        yield return StartCoroutine(ChangeSpriteColor(0.25f));
+        // return StartCoroutine(ChangeSpriteColor(0.25f));
         //yield return new WaitForSeconds(duration);
 
         aiStat.UpdateSpeed(aiStat.speed);

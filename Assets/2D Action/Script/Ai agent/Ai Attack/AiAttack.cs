@@ -235,5 +235,6 @@ public class AiAttack : MonoBehaviour
         Vector2 dir = (target.position - transform.position);
         return dir.normalized;
     }
-
+    
+    
 }

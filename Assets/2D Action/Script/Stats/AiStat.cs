@@ -12,7 +12,7 @@ namespace Stats
     {
         private NavMeshAgent agent;
         private AiAnimation anim;
-        //private SpriteRenderer spriteRenderer;
+        [SerializeField] private SpriteRenderer spriteRenderer;
 
         [Header("Ai Setting")]
         [SerializeField] private AiStatModiflier aiStatModiflier;
@@ -24,6 +24,7 @@ namespace Stats
         [Header("Ai stat")]
         public bool hasCollisionDamage;
         [SerializeField] float collisionDamage = 1;
+        [SerializeField] float takeDamageBlinkingTime = 0.05f;
 
         [Header("Random Stat")]
         [SerializeField] bool hasRandomSpeed;
@@ -40,6 +41,7 @@ namespace Stats
             agent = GetComponent<NavMeshAgent>();
             anim = GetComponent<AiAnimation>();
             aiStatModiflier = GetComponent<AiStatModiflier>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             GameManager.Instance.levelResetManager.enemyGameObject.Add(this.gameObject);
 
             if (spawnInEffect != null)
@@ -83,7 +85,6 @@ namespace Stats
                 if (aiAttack) aiAttack.enabled = false;
 
                 Animator animator = GetComponent<Animator>();
-                SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
                 animator.SetTrigger("Death");
 
@@ -183,5 +184,29 @@ namespace Stats
         {
             agent.speed = speed;
         }
+
+        public override void TakeDamage(float damage)
+        {
+            base.TakeDamage(damage);
+            StartCoroutine(TakeDamageCoroutine());
+        }
+
+        protected IEnumerator TakeDamageCoroutine()
+        {
+            // the closer to dead the redder the blink
+            Color baseColor = spriteRenderer.color;
+            float hurtRatio = 1f - (curHp / maxHp); // 0 when full, 1 when almost dead
+            hurtRatio = Mathf.Clamp01(hurtRatio);
+
+            Color targetFlash = Color.Lerp(Color.white, new Color(1f, 0f, 0f, 1f), hurtRatio);
+            Debug.Log($"Start blinking at {targetFlash} color!");
+
+            spriteRenderer.color = targetFlash;
+            yield return new WaitForSeconds(takeDamageBlinkingTime);
+            
+            spriteRenderer.color = baseColor;
+        }
+
+        
     }
 }

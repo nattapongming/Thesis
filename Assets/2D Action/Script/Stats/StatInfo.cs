@@ -29,7 +29,7 @@ namespace Stats
 
         }
 
-        virtual public void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage)
         {
             //Debug.Log($"Take damge {curHp} -> {curHp - damage}");
 
