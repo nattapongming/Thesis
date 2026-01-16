@@ -31,6 +31,7 @@ namespace Animation
 
         public void SetParameter(string parameter, bool value)
         {
+            Debug.Log($"Set {parameter} as {value}");
             animator.SetBool(parameter, value);
             animator.Update(0f);
         }

@@ -1,3 +1,4 @@
+using Ai;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,6 @@ public class AiAttack_Enemy : AiAttack
     [SerializeField] int selectAttackPattern = -1;
     [SerializeField] ChangeSelectAttackPatternType changeSelectAttackPatternType = ChangeSelectAttackPatternType.InOrder;
 
-    [SerializeField] Sprite placeHolderAttackSprite;
     protected override void Start()
     {
         base.Start();
@@ -43,12 +43,12 @@ public class AiAttack_Enemy : AiAttack
             if (numberAttackPattern > 1)
             {
                 ChangeAttackPattern();
-                CheckAttackDelay(selectAttackPattern);
+                //CheckAttackDelay(selectAttackPattern);
                 CheckAttackPatternType(selectAttackPattern);
             }
             else 
             {
-                CheckAttackDelay(0);
+                //CheckAttackDelay(0);
                 CheckAttackPatternType(0);
             }
 
@@ -84,29 +84,35 @@ public class AiAttack_Enemy : AiAttack
         switch (attackPatternTypes[index])
         {
             case AttackPatternType.Shoot:
-                CheckAttackDelay(index);
-                ShootPattern(attackPattern[index], GetDirToTarget(target));
+                CheckAttackDelay(index, AttackPatternType.Shoot);
                 break;
 
             case AttackPatternType.Lunge:
-                CheckAttackDelay(index);
-                LungeAttack(GetDirToTarget(target), lungeDistance, lungeSpeed, attackDelaySprite[index]);
+                LungeAttack(GetDirToTarget(target), lungeDistance, lungeSpeed);
+                
                 break;
         }
 
     }
 
-    private void CheckAttackDelay(int index)
+    private void CheckAttackDelay(int index, AttackPatternType type)
     {
-        if (attackDelay[index] > 0) StartCoroutine(AttackDelay(index));
+        if (attackDelay[index] > 0) StartCoroutine(AttackDelay(index, "IsAttack", type));
     }
 
-    private IEnumerator AttackDelay(int index)
+    private IEnumerator AttackDelay(int index, string target, AttackPatternType type)
     {
-        aiAnimation.ChangeAnimationSpeed(0f);
-        aiAnimation.OverrideSprite(attackDelaySprite[index]);
+        if (type == AttackPatternType.Shoot) aiStat.UpdateSpeed(0);
 
+        aiAnimation.SetParameter(target, true);
         yield return new WaitForSeconds(attackDelay[index]);
+        aiAnimation.SetParameter(target, false);
 
+        if (type == AttackPatternType.Shoot)
+        {
+            ShootPattern(attackPattern[index], GetDirToTarget(this.target));
+            aiStat.UpdateSpeed(aiStat.speed);
+        }
+        
     }
 }

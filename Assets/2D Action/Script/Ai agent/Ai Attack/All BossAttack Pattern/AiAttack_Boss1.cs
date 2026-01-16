@@ -94,7 +94,7 @@ public class AiAttack_Boss1 : AiAttack_Boss
         if (phase >= 1 && afterLungeAttackPatternGO != null && agent.target != null)
         {
             ShootPattern(afterLungeAttackPatternGO, lungeDir);
-            Debug.Log("Follow up attack!");
+            //Debug.Log("Follow up attack!");
         }
         aiStat.isAttacking = false;
     }
@@ -148,18 +148,22 @@ public class AiAttack_Boss1 : AiAttack_Boss
     {
 
         aiStat.UpdateSpeed(0);
-        //return StartCoroutine(ChangeSpriteColor(0.25f));
-        aiStat.UpdateSpeed(aiStat.speed);
-
         if (isChangeSpriteMidair)
         {
-
-        } else
-        {
-
+            aiAnimation.SetTrigger("JumpUp");
         }
+        else
+        {
             aiAnimation.SetParameter(setBool, true);
-        aiAnimation.SetTrigger("JumpUp");
+        }
+        //Debug.Log
+        yield return new WaitForSeconds(0.25f);
+
+        aiStat.UpdateSpeed(aiStat.speed);
+        
+        if (!isChangeSpriteMidair) aiAnimation.SetParameter(setBool, false);
+
+
         bool jumpDownTriggered = false;
 
         GameObject vfx = Instantiate(jumpingVFX);
@@ -221,7 +225,7 @@ public class AiAttack_Boss1 : AiAttack_Boss
         transform.position = endPos;
 
         agent.nevMeshAgent.nextPosition = transform.position;
-        aiAnimation.SetParameter("IsJumpDown", false);
+        if (isChangeSpriteMidair) aiAnimation.SetParameter("IsJumpDown", false);
         jumpDownTriggered = false;
         
     }
@@ -235,12 +239,13 @@ public class AiAttack_Boss1 : AiAttack_Boss
 
         aiStat.UpdateSpeed(0f);
 
-        // return StartCoroutine(ChangeSpriteColor(0.25f));
-        //yield return new WaitForSeconds(duration);
+        aiAnimation.SetParameter("SlashDelay", true);
+        yield return new WaitForSeconds(1f);
 
         aiStat.UpdateSpeed(aiStat.speed);
         Vector2 dirToTarget = ((Vector2)target.transform.position -  (Vector2)transform.position).normalized;
         ShootPattern(patternGO, dirToTarget);
+        aiAnimation.SetParameter("SlashDelay", false);
         aiStat.isAttacking = false;
     }
     IEnumerator UltimateAttackCoroutine()

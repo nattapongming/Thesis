@@ -33,7 +33,6 @@ public class AiAttack : MonoBehaviour
     //[SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected GameObject[] attackPattern;
     [SerializeField] protected float[] attackDelay;
-    [SerializeField] protected Sprite[] attackDelaySprite;
     [SerializeField] protected AttackPatternType[] attackPatternTypes = new AttackPatternType[] { AttackPatternType.Shoot };
 
     [Header("Targeting")]
@@ -180,26 +179,24 @@ public class AiAttack : MonoBehaviour
         }
     }
 
-    protected void LungeAttack(Vector2 dir, float distance, float lungeSpeed, Sprite lungeDelaySprite)
+    protected void LungeAttack(Vector2 dir, float distance, float lungeSpeed)
     {
         dir = dir.normalized;
-        StartCoroutine(LungeAttackCoroutine(dir, distance, lungeSpeed, lungeDelay, lungeDelaySprite));
+        StartCoroutine(LungeAttackCoroutine(dir, distance, lungeSpeed, lungeDelay));
     }
 
-    protected IEnumerator LungeAttackCoroutine(Vector2 directionIn, float distance, float lungeSpeed, float lungeDelay, Sprite lungeDelaySprite)
+    protected IEnumerator LungeAttackCoroutine(Vector2 directionIn, float distance, float lungeSpeed, float lungeDelay)
     {
         aiStat.isAttacking = true;
         Transform cachedTarget = agent.target;
         agent.SetNewTarget(null);
         aiStat.UpdateSpeed(0);
 
-        if (lungeDelaySprite != null)
-            aiAnimation.OverrideSprite(lungeDelaySprite);
+        aiAnimation.SetParameter("IsAttack", true);
 
         yield return new WaitForSeconds(lungeDelay);
 
-        aiAnimation.ResumeAnimator();
-        aiAnimation.SetTrigger("Attack");
+        aiAnimation.SetParameter("IsAttack", false);
 
         Vector3 startPos = transform.position;
         Vector3 targetPos = startPos + (Vector3)(directionIn.normalized * distance);

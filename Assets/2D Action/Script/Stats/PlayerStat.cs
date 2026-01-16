@@ -54,7 +54,7 @@ namespace Stats
         {
             if (isInvincible)
             {
-                Debug.Log("Denined");
+                //Debug.Log("Denined");
                 return;
             }
 

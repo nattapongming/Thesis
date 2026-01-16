@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3644396046569124379}
   - component: {fileID: 7199777728122166021}
   m_Layer: 0
-  m_Name: Boss_SwordSmash_Attack
+  m_Name: Skeleton_Archer_Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,10 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
   bulletPrefab:
-  - {fileID: 248653727218510311, guid: 666c4e775387bc949bd6e1d6d0068739, type: 3}
+  - {fileID: 248653727218510311, guid: e4b6e6c5c4ea1334ca2410d48b610651, type: 3}
   projectileMovement: {fileID: 0}
-  angle: 120
+  angle: 0
   accuracy: 100
   inAccuracyAngle: 50
   lifeTime: 0.5
-  pellet: 6
+  pellet: 1

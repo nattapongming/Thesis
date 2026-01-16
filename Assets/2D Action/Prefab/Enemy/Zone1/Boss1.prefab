@@ -34,9 +34,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6307830738728442936}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.19, y: 3.3600235, z: -0.017508877}
-  m_LocalScale: {x: -2, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -61,7 +61,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: ca79c386ece0d554c88ef4db938c0536, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487d98d54dab21d45ae3e3a99e44ab1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 40
+  maxHp: 50
   atk: 1
   speed: 2
   faction: 1
@@ -223,10 +223,10 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   aiStatModiflier: {fileID: 0}
   isPlayAnimWhenDied: 0
-  isEndGameWhenDied: 0
+  isEndGameWhenDied: 1
   spawnInEffect: {fileID: 0}
   spawnTimer: 1
-  hasCollisionDamage: 0
+  hasCollisionDamage: 1
   collisionDamage: 1
   takeDamageBlinkingTime: 0.05
   hasRandomSpeed: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   turret: {fileID: 0}
   aiAnimation: {fileID: 1180263069921199371}
   spriteRenderer: {fileID: 3681910908984500017}
-  baseAttackCooldown: 2.5
+  baseAttackCooldown: 0.6
   minAttackCooldown: 0.5
   currentAttackCooldown: 0
   attackCurrentCooldown: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
   lungeSpeed: 14
   lungeDelay: 0.5
   agent: {fileID: 0}
-  numberOfPattern: 1
+  numberOfPattern: 0
   numberOfPhase: 3
   hpPercentPerPhase: 33.34
   currentAttackPattern: 0
@@ -288,7 +288,7 @@ MonoBehaviour:
   groundPoundMaxRayDist: 12
   afterGroundPoundAttackPatternGO: {fileID: 248653727218510311, guid: dde05d9b641da73498e9743239fd9965, type: 3}
   ultimateAttackDuration: 5
-  ultimateSpamInterval: 0.1
+  ultimateSpamInterval: 0.05
   ultimateRotateSpeed: 180
   ultimateAttackPatternGO: {fileID: 248653727218510311, guid: e4186fe83a545494d903bac72d4ff2d5, type: 3}
   jumpingVFX: {fileID: 4228757585784089052, guid: 73895d9d203ab5d48a2938e4ea4897b8, type: 3}
